@@ -6,6 +6,7 @@ import { render, View, TextStyles, Text } from 'react-sketchapp';
 import designSystem from './designSystem';
 import Activity from './activity';
 import Enquiry from './enquiry';
+import Styleguide from './styleguide';
 
 export default () => {
   TextStyles.create(
@@ -16,5 +17,5 @@ export default () => {
     designSystem.fonts
   );
 
-  render(<Enquiry system={designSystem} />, context.document.currentPage());
+  render(<Styleguide system={designSystem} />, context.document.currentPage());
 };
