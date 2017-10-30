@@ -7851,9 +7851,11 @@ var _styleguide = __webpack_require__(167);
 
 var _styleguide2 = _interopRequireDefault(_styleguide);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+var _screen = __webpack_require__(173);
 
-/* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
+var _screen2 = _interopRequireDefault(_screen);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 exports['default'] = function () {
   _reactSketchapp.TextStyles.create({
@@ -7861,8 +7863,9 @@ exports['default'] = function () {
     clearExistingStyles: true
   }, _designSystem2['default'].fonts);
 
-  (0, _reactSketchapp.render)(_react2['default'].createElement(_enquiry2['default'], { system: _designSystem2['default'] }), context.document.currentPage());
+  (0, _reactSketchapp.render)(_react2['default'].createElement(_screen2['default'], { system: _designSystem2['default'] }), context.document.currentPage());
 };
+/* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 /***/ }),
 /* 82 */
@@ -21217,6 +21220,108 @@ var TypeSpecimen = function TypeSpecimen(_ref) {
   );
 };
 exports['default'] = TypeSpecimen;
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactSketchapp = __webpack_require__(2);
+
+var _designSystem = __webpack_require__(4);
+
+var _Timeline = __webpack_require__(175);
+
+var _Timeline2 = _interopRequireDefault(_Timeline);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var height = 640;
+var width = 360;
+
+exports['default'] = Screen = function Screen(props) {
+  return _react2['default'].createElement(
+    _reactSketchapp.View,
+    { style: { width: width, height: height, borderColor: _designSystem.colors.savla, borderWidth: 2, backgroundColor: _designSystem.colors.pandra, flexDirection: 'column' } },
+    _react2['default'].createElement(_Timeline2['default'], null)
+  );
+};
+
+/***/ }),
+/* 174 */,
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactSketchapp = __webpack_require__(2);
+
+var _designSystem = __webpack_require__(4);
+
+var _Agenda = __webpack_require__(162);
+
+var _Agenda2 = _interopRequireDefault(_Agenda);
+
+var _dateRow = __webpack_require__(165);
+
+var _dateRow2 = _interopRequireDefault(_dateRow);
+
+var _resultRow = __webpack_require__(80);
+
+var _resultRow2 = _interopRequireDefault(_resultRow);
+
+var _PageNav = __webpack_require__(73);
+
+var _PageNav2 = _interopRequireDefault(_PageNav);
+
+var _BottomTabNav = __webpack_require__(74);
+
+var _BottomTabNav2 = _interopRequireDefault(_BottomTabNav);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+exports['default'] = Timeline = function Timeline(_ref) {
+  var styles = _ref.styles;
+  return _react2['default'].createElement(
+    _reactSketchapp.View,
+    { style: Object.assign({ flex: 1 }, styles) },
+    _react2['default'].createElement(_PageNav2['default'], { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' }),
+    _react2['default'].createElement(_Agenda2['default'], null),
+    _react2['default'].createElement(
+      _reactSketchapp.View,
+      { style: { flex: 1 } },
+      _react2['default'].createElement(
+        _dateRow2['default'],
+        { date: '23', day: 'Mon' },
+        _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+      ),
+      _react2['default'].createElement(
+        _dateRow2['default'],
+        null,
+        _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+      ),
+      _react2['default'].createElement(
+        _dateRow2['default'],
+        { date: '24', day: 'Tue' },
+        _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+      )
+    ),
+    _react2['default'].createElement(_BottomTabNav2['default'], null)
+  );
+};
 
 /***/ })
 /******/ ]);

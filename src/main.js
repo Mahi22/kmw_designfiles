@@ -7,6 +7,7 @@ import designSystem from './designSystem';
 import Activity from './activity';
 import Enquiry from './enquiry';
 import Styleguide from './styleguide';
+import Screen from './screen';
 
 export default () => {
   TextStyles.create(
@@ -17,5 +18,5 @@ export default () => {
     designSystem.fonts
   );
 
-  render(<Enquiry system={designSystem} />, context.document.currentPage());
+  render(<Screen system={designSystem} />, context.document.currentPage());
 };
