@@ -6,6 +6,7 @@ lib
 react-example.sketchplugin
 _book
 .vscode
+styleguide.sketchplugin
 
 # only apps should have lockfiles
 yarn.lock
