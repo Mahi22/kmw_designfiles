@@ -3,11 +3,11 @@ import React from 'react';
 import { View, Text } from 'react-sketchapp';
 import { colors, fonts } from '../designSystem';
 
-type P = {
-  title: string,
-  children?: any,
-};
-const Agenda = ({ title, children }: P) => (
+// type P = {
+//   title: string,
+//   children?: any,
+// };
+const Agenda = () => (
   <View>
     <View style={{ paddingBottom: 16, paddingTop: 16, flexDirection: 'row', marginLeft: 16, marginRight: 16 }}>
       <View style={{ flex:1 }}>

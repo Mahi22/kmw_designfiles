@@ -6,10 +6,11 @@ import TextBox from '../forms/textBox';
 
 type P = {
   title: string,
-  button: string
+  button: string,
+  focus: boolean
 };
-const SearchNav = ({ title, button }: P) => (
-  <View style={{ flexDirection: 'row', backgroundColor: colors.pandra, paddingTop: 4, paddingBottom: 4, borderColor: colors.goora, borderBottomWidth: 2 }}>
+const SearchNav = ({ title, button, focus }: P) => (
+  <View style={{ flexDirection: 'row', backgroundColor: colors.pandra, paddingTop: 4, paddingBottom: 4, borderColor: focus ? colors.kala : colors.goora, borderBottomWidth: 2 }}>
     <View style={{ flex: 1 }}>
       <TextBox value="" placeholder="Search" icon margin={16} />
     </View>
