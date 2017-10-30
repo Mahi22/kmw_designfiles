@@ -16,7 +16,9 @@ const Row = ({ children, margin, first, last }: P) => (
     marginLeft: margin ? margin : 16,
     marginRight: margin ? margin : 16,
     marginTop: first ? 44 : 12,
-    marginBottom: last ? 44 : 12
+    marginBottom: last ? 44 : 12,
+    borderColor: colors.goora,
+    borderWidth: 1
   }}>
     {children}
   </View>

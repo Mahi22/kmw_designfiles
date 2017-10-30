@@ -22,7 +22,7 @@ type P = {
   status?: any
 };
 const ResultRow = ({ title, subtitle, style, status = [] }: P) => (
-  <View style={{ flexDirection: 'column', ...style }}>
+  <View style={{ flexDirection: 'column', paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24, ...style }}>
     <View style={{
       flexDirection: 'row',
       marginBottom: 8,
