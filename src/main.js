@@ -17,5 +17,5 @@ export default () => {
     designSystem.fonts
   );
 
-  render(<Styleguide system={designSystem} />, context.document.currentPage());
+  render(<Enquiry system={designSystem} />, context.document.currentPage());
 };
