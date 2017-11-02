@@ -11,12 +11,12 @@ import BottomTabNav from '../../components/navigation/BottomTabNav';
 export default Filter = (({styles}) => (
   <View>
     <PageNav title="Filter" leftIcon="down-arrow.svg" />
-    <View style={{flex: 1}}>
-      <FlRow title="filter" />
-      <FlRow title="filter" />
-    </View>
-    <BottomButton label="Apply Filter" styles={{ }}/>
-  </View>
-)
+    <View style={{flexGrow: 1, flexDirection: 'column', height: 480}}>
 
-);
+      <FlRow title="filter"></FlRow>
+      <FlRow title="filter"></FlRow>
+    </View>
+    <BottomButton label="Apply Filter" styles={{ }}>
+    </BottomButton>
+  </View>
+));
