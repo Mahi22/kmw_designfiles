@@ -3,7 +3,7 @@
 *.log*
 node_modules
 lib
-react-example.sketchplugin
+styleguide.sketchplugin
 _book
 .vscode
 styleguide.sketchplugin
