@@ -6,10 +6,11 @@ import { colors, fonts } from '../../designSystem';
 type P = {
   label: string,
   count: number,
-  disabled?: boolean
+  disabled?: boolean,
+  styles: any
 };
-const BottomButton = ({ count = 1, label, disabled }: P) => (
-  <View style={{ flexDirection: 'row', backgroundColor: disabled ? colors.goora : colors.cold, paddingTop: 14, paddingBottom: 14, borderTopColor: colors.goora, borderTopWidth: 2, borderBottomWidth: 2, borderBottomColor: '#c8c8c8'  }}>
+const BottomButton = ({ count = 1, label, disabled, styles }: P) => (
+  <View style={{ flexDirection: 'row', backgroundColor: disabled ? colors.goora : colors.cold, paddingTop:   14, paddingBottom: 14, borderTopColor: colors.goora, borderTopWidth: 2, borderBottomWidth: 2, borderBottomColor: '#c8c8c8',...styles}}>
     {
       label ?
       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>

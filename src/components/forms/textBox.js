@@ -37,6 +37,7 @@ const TextBox= ({ label, value, first, last, placeholder, focus, error, icon, ma
       paddingTop: 12,
       paddingBottom: 12,
       paddingLeft: 12,
+      paddingRight: 12,
       marginLeft: margin ? margin : 48,
       marginRight: margin ? margin : 48,
       boxSizing: 'border-box',

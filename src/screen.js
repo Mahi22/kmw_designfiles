@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-sketchapp';
 import { colors, fonts } from './designSystem';
 
-
 const height = 640;
 const width = 360;
 const Screen = (props) => (
