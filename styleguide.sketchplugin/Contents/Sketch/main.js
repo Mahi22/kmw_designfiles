@@ -65,7 +65,7 @@ var exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 85);
+/******/ 	return __webpack_require__(__webpack_require__.s = 83);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -278,7 +278,7 @@ module.exports = __webpack_require__(23);
 
 var _render = __webpack_require__(52);
 
-var _Platform = __webpack_require__(151);
+var _Platform = __webpack_require__(149);
 
 var _Platform2 = _interopRequireDefault(_Platform);
 
@@ -286,11 +286,11 @@ var _stylesheet = __webpack_require__(18);
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
 
-var _Artboard = __webpack_require__(152);
+var _Artboard = __webpack_require__(150);
 
 var _Artboard2 = _interopRequireDefault(_Artboard);
 
-var _Image = __webpack_require__(153);
+var _Image = __webpack_require__(151);
 
 var _Image2 = _interopRequireDefault(_Image);
 
@@ -334,16 +334,81 @@ module.exports = {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var validateFormat = function validateFormat(format) {};
+
+if (process.env.NODE_ENV !== 'production') {
+  validateFormat = function validateFormat(format) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  };
+}
+
+function invariant(condition, format, a, b, c, d, e, f) {
+  validateFormat(format);
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+}
+
+module.exports = invariant;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fonts = exports.spacing = exports.colors = undefined;
 
-var _processColor = __webpack_require__(154);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _processColor = __webpack_require__(152);
 
 var _processColor2 = _interopRequireDefault(_processColor);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -432,73 +497,13 @@ var fonts = exports.fonts = {
   }
 };
 
-exports['default'] = {
+exports.default = {
   colors: Object.keys(colors).reduce(function (acc, name) {
-    return Object.assign({}, acc, _defineProperty({}, name, (0, _processColor2['default'])(colors[name])));
+    return _extends({}, acc, _defineProperty({}, name, (0, _processColor2.default)(colors[name])));
   }, {}),
   fonts: fonts,
   spacing: spacing
 };
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var validateFormat = function validateFormat(format) {};
-
-if (process.env.NODE_ENV !== 'production') {
-  validateFormat = function validateFormat(format) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  };
-}
-
-function invariant(condition, format, a, b, c, d, e, f) {
-  validateFormat(format);
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-}
-
-module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 5 */
@@ -515,7 +520,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(16);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -567,7 +572,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(10)))
 
 /***/ }),
 /* 6 */
@@ -723,7 +728,7 @@ exports.generateID = generateID;
 
 var _sketchConstants = __webpack_require__(21);
 
-var _normalizeCssColor = __webpack_require__(137);
+var _normalizeCssColor = __webpack_require__(135);
 
 var _normalizeCssColor2 = _interopRequireDefault(_normalizeCssColor);
 
@@ -876,11 +881,11 @@ var makeSymbolMaster = exports.makeSymbolMaster = function makeSymbolMaster(fram
 
 
 
-var _prodInvariant = __webpack_require__(13);
+var _prodInvariant = __webpack_require__(15);
 
-var ReactCurrentOwner = __webpack_require__(10);
+var ReactCurrentOwner = __webpack_require__(11);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
 
 function isNative(fn) {
@@ -1241,10 +1246,68 @@ var ReactComponentTreeHook = {
 };
 
 module.exports = ReactComponentTreeHook;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(10)))
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/* globals log */
+
+var console = {
+  log: log,
+  warn: log,
+  error: log,
+  dump: function (obj) {
+    log('###############################################')
+    log('## Dumping object ' + obj)
+    if (obj.className) {
+      log('## obj class is: ' + obj.className())
+    }
+    log('###############################################')
+
+    if (obj.class && obj.class().mocha) {
+      log('obj.properties:')
+      log(obj.class().mocha().properties())
+      log('obj.propertiesWithAncestors:')
+      log(obj.class().mocha().propertiesWithAncestors())
+
+      log('obj.classMethods:')
+      log(obj.class().mocha().classMethods())
+      log('obj.classMethodsWithAncestors:')
+      log(obj.class().mocha().classMethodsWithAncestors())
+
+      log('obj.instanceMethods:')
+      log(obj.class().mocha().instanceMethods())
+      log('obj.instanceMethodsWithAncestors:')
+      log(obj.class().mocha().instanceMethodsWithAncestors())
+
+      log('obj.protocols:')
+      log(obj.class().mocha().protocols())
+      log('obj.protocolsWithAncestors:')
+      log(obj.class().mocha().protocolsWithAncestors())
+    }
+
+    if (obj.treeAsDictionary) {
+      log('obj.treeAsDictionary():')
+      log(obj.treeAsDictionary())
+    }
+  }
+}
+
+// polyfill the global object
+var commonjsGlobal = typeof global !== 'undefined'
+  ? global
+  : this
+
+commonjsGlobal.console = commonjsGlobal.console || console
+
+module.exports = console
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45)))
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1276,7 +1339,45 @@ var ReactCurrentOwner = {
 module.exports = ReactCurrentOwner;
 
 /***/ }),
-/* 11 */
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactSketchapp = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Label = function Label(_ref) {
+  var bold = _ref.bold,
+      children = _ref.children;
+  return _react2.default.createElement(
+    _reactSketchapp.Text,
+    {
+      style: {
+        color: '#333',
+        fontWeight: bold ? 'bold' : 'normal',
+        fontSize: 16,
+        lineHeight: 24
+      }
+    },
+    children
+  );
+};
+
+exports.default = Label;
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1292,7 +1393,7 @@ module.exports = ReactCurrentOwner;
 
 var _assign = __webpack_require__(7);
 
-var ReactCurrentOwner = __webpack_require__(10);
+var ReactCurrentOwner = __webpack_require__(11);
 
 var warning = __webpack_require__(5);
 var canDefineProperty = __webpack_require__(24);
@@ -1621,42 +1722,42 @@ module.exports = ReactElement;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-var _react = __webpack_require__(1);
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
 
-var _react2 = _interopRequireDefault(_react);
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
 
-var _reactSketchapp = __webpack_require__(2);
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(51)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(143)();
+}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var Label = function Label(_ref) {
-  var bold = _ref.bold,
-      children = _ref.children;
-  return _react2['default'].createElement(
-    _reactSketchapp.Text,
-    {
-      style: {
-        color: '#333',
-        fontWeight: bold ? 'bold' : 'normal',
-        fontSize: 16,
-        lineHeight: 24
-      }
-    },
-    children
-  );
-};
-
-exports['default'] = Label;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1698,65 +1799,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {/* globals log */
-
-var console = {
-  log: log,
-  warn: log,
-  error: log,
-  dump: function (obj) {
-    log('###############################################')
-    log('## Dumping object ' + obj)
-    if (obj.className) {
-      log('## obj class is: ' + obj.className())
-    }
-    log('###############################################')
-
-    if (obj.class && obj.class().mocha) {
-      log('obj.properties:')
-      log(obj.class().mocha().properties())
-      log('obj.propertiesWithAncestors:')
-      log(obj.class().mocha().propertiesWithAncestors())
-
-      log('obj.classMethods:')
-      log(obj.class().mocha().classMethods())
-      log('obj.classMethodsWithAncestors:')
-      log(obj.class().mocha().classMethodsWithAncestors())
-
-      log('obj.instanceMethods:')
-      log(obj.class().mocha().instanceMethods())
-      log('obj.instanceMethodsWithAncestors:')
-      log(obj.class().mocha().instanceMethodsWithAncestors())
-
-      log('obj.protocols:')
-      log(obj.class().mocha().protocols())
-      log('obj.protocolsWithAncestors:')
-      log(obj.class().mocha().protocolsWithAncestors())
-    }
-
-    if (obj.treeAsDictionary) {
-      log('obj.treeAsDictionary():')
-      log(obj.treeAsDictionary())
-    }
-  }
-}
-
-// polyfill the global object
-var commonjsGlobal = typeof global !== 'undefined'
-  ? global
-  : this
-
-commonjsGlobal.console = commonjsGlobal.console || console
-
-module.exports = console
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45)))
-
-/***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1798,7 +1841,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1808,7 +1851,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _layerGroup = __webpack_require__(138);
+var _layerGroup = __webpack_require__(136);
 
 var _layerGroup2 = _interopRequireDefault(_layerGroup);
 
@@ -1863,48 +1906,13 @@ var SketchRenderer = function () {
 module.exports = SketchRenderer;
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(51)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(145)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _expandStyle = __webpack_require__(146);
+var _expandStyle = __webpack_require__(144);
 
 var _expandStyle2 = _interopRequireDefault(_expandStyle);
 
@@ -2122,7 +2130,7 @@ function fromSJSONDictionary(jsonTree) {
 
 
 
-var ReactRef = __webpack_require__(105);
+var ReactRef = __webpack_require__(103);
 var ReactInstrumentation = __webpack_require__(27);
 
 var warning = __webpack_require__(5);
@@ -2433,14 +2441,14 @@ module.exports = {};
 var _assign = __webpack_require__(7);
 
 var ReactBaseClasses = __webpack_require__(46);
-var ReactChildren = __webpack_require__(86);
-var ReactDOMFactories = __webpack_require__(90);
-var ReactElement = __webpack_require__(11);
-var ReactPropTypes = __webpack_require__(94);
-var ReactVersion = __webpack_require__(97);
+var ReactChildren = __webpack_require__(84);
+var ReactDOMFactories = __webpack_require__(88);
+var ReactElement = __webpack_require__(13);
+var ReactPropTypes = __webpack_require__(92);
+var ReactVersion = __webpack_require__(95);
 
-var createReactClass = __webpack_require__(98);
-var onlyChild = __webpack_require__(100);
+var createReactClass = __webpack_require__(96);
+var onlyChild = __webpack_require__(98);
 
 var createElement = ReactElement.createElement;
 var createFactory = ReactElement.createFactory;
@@ -2625,11 +2633,11 @@ var _prodInvariant = __webpack_require__(6),
 
 var CallbackQueue = __webpack_require__(54);
 var PooledClass = __webpack_require__(33);
-var ReactFeatureFlags = __webpack_require__(104);
+var ReactFeatureFlags = __webpack_require__(102);
 var ReactReconciler = __webpack_require__(20);
 var Transaction = __webpack_require__(34);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 var dirtyComponents = [];
 var updateBatchNumber = 0;
@@ -2858,7 +2866,7 @@ var ReactUpdates = {
 };
 
 module.exports = ReactUpdates;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(10)))
 
 /***/ }),
 /* 27 */
@@ -2881,7 +2889,7 @@ module.exports = ReactUpdates;
 var debugTool = null;
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactDebugTool = __webpack_require__(107);
+  var ReactDebugTool = __webpack_require__(105);
   debugTool = ReactDebugTool;
 }
 
@@ -3116,7 +3124,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = lowPriorityWarning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(10)))
 
 /***/ }),
 /* 30 */
@@ -3214,7 +3222,7 @@ module.exports = invariant;
 
 var _prodInvariant = __webpack_require__(6);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 var injected = false;
 
@@ -3262,7 +3270,7 @@ module.exports = ReactComponentEnvironment;
 
 var _prodInvariant = __webpack_require__(6);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 /**
  * Static poolers. Several custom versions for each potential number of
@@ -3378,7 +3386,7 @@ module.exports = PooledClass;
 
 var _prodInvariant = __webpack_require__(6);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 var OBSERVED_ERROR = {};
 
@@ -3921,6 +3929,9 @@ var makeShapeGroup = exports.makeShapeGroup = function makeShapeGroup(frame) {
 /* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -3935,39 +3946,44 @@ var _Label = __webpack_require__(12);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Section = function Section(_ref) {
   var title = _ref.title,
       children = _ref.children;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { marginBottom: 96, flexDirection: 'row' } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { width: 200 } },
-      _react2['default'].createElement(
-        _Label2['default'],
+      _react2.default.createElement(
+        _Label2.default,
         { bold: true },
         title
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       null,
       children
     )
   );
 };
-exports['default'] = Section;
+exports.default = Section;
 
 /***/ }),
 /* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -3975,36 +3991,42 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PageNav = function PageNav(_ref) {
   var title = _ref.title;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.pandra, paddingTop: 32, paddingBottom: 22, borderColor: _designSystem.colors.goora, borderBottomWidth: 2 } },
-    _react2['default'].createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginLeft: 16, marginRight: 8, marginTop: 2 } }),
-    _react2['default'].createElement(
+    _react2.default.createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginLeft: 16, marginRight: 8, marginTop: 2 } }),
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Title 4'], {
+      { style: _extends({}, _designSystem.fonts['Title 4'], {
           flex: 1,
           textAlign: 'center'
         }) },
       title
     ),
-    _react2['default'].createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginLeft: 8, marginRight: 16, marginTop: 2 } })
+    _react2.default.createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginLeft: 8, marginRight: 16, marginTop: 2 } })
   );
 };
-exports['default'] = PageNav;
+
+exports.default = PageNav;
 
 /***/ }),
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -4012,9 +4034,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BottomTabNav = function BottomTabNav(_ref) {
   var _ref$left = _ref.left,
@@ -4023,47 +4045,53 @@ var BottomTabNav = function BottomTabNav(_ref) {
       right = _ref$right === undefined ? 'Filter' : _ref$right,
       _ref$middle = _ref.middle,
       middle = _ref$middle === undefined ? 'ADD' : _ref$middle;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.pandra, paddingTop: 14, paddingBottom: 16, borderTopColor: _designSystem.colors.goora, borderTopWidth: 2, borderBottomWidth: 2, borderBottomColor: '#c8c8c8' } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 1, flexDirection: 'row', justifyContent: 'center' } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Regular'], { color: _designSystem.colors.cold }) },
+        { style: _extends({}, _designSystem.fonts['Regular'], { color: _designSystem.colors.cold }) },
         left
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 1, flexDirection: 'row', justifyContent: 'center' } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Regular'], { color: _designSystem.colors.cold }) },
+        { style: _extends({}, _designSystem.fonts['Regular'], { color: _designSystem.colors.cold }) },
         middle
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 1, flexDirection: 'row', justifyContent: 'center' } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Regular'], { color: _designSystem.colors.cold }) },
+        { style: _extends({}, _designSystem.fonts['Regular'], { color: _designSystem.colors.cold }) },
         right
       )
     )
   );
 };
-exports['default'] = BottomTabNav;
+
+exports.default = BottomTabNav;
 
 /***/ }),
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -4071,9 +4099,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TextBox = function TextBox(_ref) {
   var label = _ref.label,
@@ -4085,12 +4113,12 @@ var TextBox = function TextBox(_ref) {
       error = _ref.error,
       icon = _ref.icon,
       margin = _ref.margin;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'column', backgroundColor: _designSystem.colors.pandra } },
-    label ? _react2['default'].createElement(
+    label ? _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Large'], {
+      { style: _extends({}, _designSystem.fonts['Large'], {
           flex: 1,
           marginTop: first ? 44 : 12,
           marginLeft: 48,
@@ -4099,7 +4127,7 @@ var TextBox = function TextBox(_ref) {
         }) },
       label
     ) : null,
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: {
           flex: 1,
@@ -4116,10 +4144,10 @@ var TextBox = function TextBox(_ref) {
           borderStyle: 'solid',
           borderColor: focus ? _designSystem.colors.savla : error ? _designSystem.colors.hot : _designSystem.colors.goora
         } },
-      icon ? _react2['default'].createElement(_reactSketchapp.View, { style: { width: 12, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 12, marginRight: 8, marginTop: 4 } }) : null,
-      _react2['default'].createElement(
+      icon ? _react2.default.createElement(_reactSketchapp.View, { style: { width: 12, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 12, marginRight: 8, marginTop: 4 } }) : null,
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Regular'], {
+        { style: _extends({}, _designSystem.fonts['Regular'], {
             color: value === '' ? _designSystem.colors.savla : error ? _designSystem.colors.hot : _designSystem.colors.kala
           }) },
         value === '' ? placeholder : value
@@ -4127,15 +4155,21 @@ var TextBox = function TextBox(_ref) {
     )
   );
 };
-exports['default'] = TextBox;
+
+exports.default = TextBox;
 
 /***/ }),
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -4143,9 +4177,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function getBorderColor(status) {
   if (status.indexOf('HOT') !== -1 || status.indexOf('HOTF') !== -1) {
@@ -4163,32 +4197,32 @@ var ResultRow = function ResultRow(_ref) {
       style = _ref.style,
       _ref$status = _ref.status,
       status = _ref$status === undefined ? [] : _ref$status;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
-    { style: Object.assign({ flexDirection: 'column', paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24 }, style) },
-    _react2['default'].createElement(
+    { style: _extends({ flexDirection: 'column', paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24 }, style) },
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: {
           flexDirection: 'row',
           marginBottom: 8
         } },
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.pandra, marginRight: 4, borderWidth: 1, borderColor: getBorderColor(status) } }),
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.warm, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.warm } }),
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.hot, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.hot } }),
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.warm, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.warm } }),
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.hot, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.hot } }),
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.warm, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.warm } })
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.pandra, marginRight: 4, borderWidth: 1, borderColor: getBorderColor(status) } }),
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.warm, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.warm } }),
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.hot, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.hot } }),
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.warm, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.warm } }),
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.hot, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.hot } }),
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 16, height: 4, borderRadius: 2, backgroundColor: _designSystem.colors.warm, marginRight: 4, borderWidth: 1, borderColor: _designSystem.colors.warm } })
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Large'], {
+      { style: _extends({}, _designSystem.fonts['Large'], {
           flex: 1
         }) },
       title
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Small'], {
+      { style: _extends({}, _designSystem.fonts['Small'], {
           flex: 1,
           marginTop: 16,
           color: _designSystem.colors.savla
@@ -4198,7 +4232,7 @@ var ResultRow = function ResultRow(_ref) {
   );
 };
 
-exports['default'] = ResultRow;
+exports.default = ResultRow;
 
 /***/ }),
 /* 44 */
@@ -4288,14 +4322,14 @@ module.exports = g;
 
 
 
-var _prodInvariant = __webpack_require__(13),
+var _prodInvariant = __webpack_require__(15),
     _assign = __webpack_require__(7);
 
 var ReactNoopUpdateQueue = __webpack_require__(47);
 
 var canDefineProperty = __webpack_require__(24);
 var emptyObject = __webpack_require__(25);
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 var lowPriorityWarning = __webpack_require__(29);
 
 /**
@@ -4608,11 +4642,11 @@ module.exports = getIteratorFn;
 
 
 
-var ReactCurrentOwner = __webpack_require__(10);
+var ReactCurrentOwner = __webpack_require__(11);
 var ReactComponentTreeHook = __webpack_require__(9);
-var ReactElement = __webpack_require__(11);
+var ReactElement = __webpack_require__(13);
 
-var checkReactTypeSpec = __webpack_require__(91);
+var checkReactTypeSpec = __webpack_require__(89);
 
 var canDefineProperty = __webpack_require__(24);
 var getIteratorFn = __webpack_require__(49);
@@ -4859,13 +4893,13 @@ module.exports = ReactElementValidator;
 
 
 
-var emptyFunction = __webpack_require__(15);
-var invariant = __webpack_require__(4);
+var emptyFunction = __webpack_require__(16);
+var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
 var assign = __webpack_require__(7);
 
 var ReactPropTypesSecret = __webpack_require__(30);
-var checkPropTypes = __webpack_require__(96);
+var checkPropTypes = __webpack_require__(94);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -5393,7 +5427,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(10)))
 
 /***/ }),
 /* 52 */
@@ -5485,19 +5519,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reactTestRenderer = __webpack_require__(101);
+var _reactTestRenderer = __webpack_require__(99);
 
 var _reactTestRenderer2 = _interopRequireDefault(_reactTestRenderer);
 
-var _cssLayout = __webpack_require__(130);
+var _cssLayout = __webpack_require__(128);
 
 var _cssLayout2 = _interopRequireDefault(_cssLayout);
 
-var _Context = __webpack_require__(131);
+var _Context = __webpack_require__(129);
 
 var _Context2 = _interopRequireDefault(_Context);
 
-var _createStringMeasurer = __webpack_require__(132);
+var _createStringMeasurer = __webpack_require__(130);
 
 var _createStringMeasurer2 = _interopRequireDefault(_createStringMeasurer);
 
@@ -5595,7 +5629,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var PooledClass = __webpack_require__(33);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 /**
  * A specialized pseudo-event module to help keep track of components waiting to
@@ -5786,12 +5820,12 @@ module.exports = ReactEmptyComponent;
 var _prodInvariant = __webpack_require__(6),
     _assign = __webpack_require__(7);
 
-var ReactCompositeComponent = __webpack_require__(114);
+var ReactCompositeComponent = __webpack_require__(112);
 var ReactEmptyComponent = __webpack_require__(56);
 var ReactHostComponent = __webpack_require__(60);
 
-var getNextDebugID = __webpack_require__(120);
-var invariant = __webpack_require__(4);
+var getNextDebugID = __webpack_require__(118);
+var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
 
 // To avoid a cyclic dependency, we create the final class in this module
@@ -5921,7 +5955,7 @@ var _prodInvariant = __webpack_require__(6);
 
 var React = __webpack_require__(23);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 var ReactNodeTypes = {
   HOST: 0,
@@ -6007,7 +6041,7 @@ module.exports = shouldUpdateReactComponent;
 
 var _prodInvariant = __webpack_require__(6);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 var genericComponentClass = null;
 var textComponentClass = null;
@@ -6079,11 +6113,11 @@ module.exports = ReactHostComponent;
 
 var _prodInvariant = __webpack_require__(6);
 
-var ReactCurrentOwner = __webpack_require__(10);
-var REACT_ELEMENT_TYPE = __webpack_require__(121);
+var ReactCurrentOwner = __webpack_require__(11);
+var REACT_ELEMENT_TYPE = __webpack_require__(119);
 
-var getIteratorFn = __webpack_require__(122);
-var invariant = __webpack_require__(4);
+var getIteratorFn = __webpack_require__(120);
+var invariant = __webpack_require__(3);
 var KeyEscapeUtils = __webpack_require__(36);
 var warning = __webpack_require__(5);
 
@@ -6470,11 +6504,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _murmur2js = __webpack_require__(133);
+var _murmur2js = __webpack_require__(131);
 
 var _murmur2js2 = _interopRequireDefault(_murmur2js);
 
-var _sortObjectKeys = __webpack_require__(134);
+var _sortObjectKeys = __webpack_require__(132);
 
 var _sortObjectKeys2 = _interopRequireDefault(_sortObjectKeys);
 
@@ -6523,7 +6557,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _renderers = __webpack_require__(135);
+var _renderers = __webpack_require__(133);
 
 var _renderers2 = _interopRequireDefault(_renderers);
 
@@ -6693,7 +6727,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _sketchConstants = __webpack_require__(21);
 
-var _SketchRenderer2 = __webpack_require__(16);
+var _SketchRenderer2 = __webpack_require__(17);
 
 var _SketchRenderer3 = _interopRequireDefault(_SketchRenderer2);
 
@@ -6915,7 +6949,7 @@ var _hashStyle = __webpack_require__(64);
 
 var _hashStyle2 = _interopRequireDefault(_hashStyle);
 
-var _sharedTextStyles = __webpack_require__(143);
+var _sharedTextStyles = __webpack_require__(141);
 
 var _sharedTextStyles2 = _interopRequireDefault(_sharedTextStyles);
 
@@ -7025,7 +7059,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(14);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -7240,11 +7274,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(14);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _errorStackParser = __webpack_require__(148);
+var _errorStackParser = __webpack_require__(146);
 
 var _errorStackParser2 = _interopRequireDefault(_errorStackParser);
 
@@ -7402,7 +7436,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(14);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -7410,7 +7444,7 @@ var _stylesheet = __webpack_require__(18);
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
 
-var _TextStylePropTypes = __webpack_require__(150);
+var _TextStylePropTypes = __webpack_require__(148);
 
 var _TextStylePropTypes2 = _interopRequireDefault(_TextStylePropTypes);
 
@@ -7487,7 +7521,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(14);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -7550,6 +7584,9 @@ module.exports = View;
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -7560,11 +7597,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _Mobile = __webpack_require__(159);
+var _Mobile = __webpack_require__(157);
 
 var _Mobile2 = _interopRequireDefault(_Mobile);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var devices = [{
   name: 'android',
@@ -7588,28 +7625,33 @@ var devices = [{
 var Devices = function Devices(_ref) {
   var children = _ref.children,
       overflow = _ref.overflow;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row' }, name: 'Devices' },
     devices.map(function (device, index) {
-      return _react2['default'].createElement(
-        _Mobile2['default'],
-        { width: device.width, height: device.height, name: device.name, key: 'device' + String(index), overflow: overflow ? true : false },
+      return _react2.default.createElement(
+        _Mobile2.default,
+        { width: device.width, height: device.height, name: device.name, key: 'device' + index, overflow: overflow ? true : false },
         children
       );
     })
   );
 };
 
-exports['default'] = Devices;
+exports.default = Devices;
 
 /***/ }),
 /* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -7617,59 +7659,19 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var Row = function Row(_ref) {
-  var children = _ref.children,
-      margin = _ref.margin,
-      first = _ref.first,
-      last = _ref.last;
-  return _react2['default'].createElement(
-    _reactSketchapp.View,
-    { style: {
-        flexDirection: 'column',
-        backgroundColor: _designSystem.colors.pandra,
-        marginLeft: margin ? margin : 16,
-        marginRight: margin ? margin : 16,
-        marginTop: first ? 44 : 12,
-        marginBottom: last ? 44 : 12,
-        borderColor: _designSystem.colors.goora,
-        borderWidth: 1
-      } },
-    children
-  );
-};
-exports['default'] = Row;
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactSketchapp = __webpack_require__(2);
-
-var _designSystem = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LdRow = function LdRow(_ref) {
   var title = _ref.title;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.goora } },
-    _react2['default'].createElement(_reactSketchapp.View, { style: { width: 12, borderWidth: 1, borderColor: _designSystem.colors.kala, height: 12, marginLeft: 16, marginTop: 52, borderRadius: 6 } }),
-    _react2['default'].createElement(
+    _react2.default.createElement(_reactSketchapp.View, { style: { width: 12, borderWidth: 1, borderColor: _designSystem.colors.kala, height: 12, marginLeft: 16, marginTop: 52, borderRadius: 6 } }),
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Title 4'], {
+      { style: _extends({}, _designSystem.fonts['Title 4'], {
           flex: 1,
           marginTop: 44,
           paddingBottom: 42,
@@ -7682,15 +7684,21 @@ var LdRow = function LdRow(_ref) {
     )
   );
 };
-exports['default'] = LdRow;
+
+exports.default = LdRow;
 
 /***/ }),
-/* 78 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -7698,27 +7706,27 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BackNav = function BackNav(_ref) {
   var title = _ref.title,
       button = _ref.button;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.pandra, paddingTop: 32, paddingBottom: 22, borderColor: _designSystem.colors.goora, borderBottomWidth: 2 } },
-    _react2['default'].createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginLeft: 16, marginRight: 8, marginTop: 2 } }),
-    _react2['default'].createElement(
+    _react2.default.createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginLeft: 16, marginRight: 8, marginTop: 2 } }),
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Title 4'], {
+      { style: _extends({}, _designSystem.fonts['Title 4'], {
           flex: 1
         }) },
       title
     ),
-    button ? _react2['default'].createElement(
+    button ? _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Small'], {
+      { style: _extends({}, _designSystem.fonts['Small'], {
           marginRight: 16,
           marginTop: 6,
           color: _designSystem.colors['hirva']
@@ -7727,15 +7735,21 @@ var BackNav = function BackNav(_ref) {
     ) : null
   );
 };
-exports['default'] = BackNav;
+
+exports.default = BackNav;
 
 /***/ }),
-/* 79 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -7743,44 +7757,50 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BottomButton = function BottomButton(_ref) {
   var _ref$count = _ref.count,
       count = _ref$count === undefined ? 1 : _ref$count,
       label = _ref.label,
       disabled = _ref.disabled;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row', backgroundColor: disabled ? _designSystem.colors.goora : _designSystem.colors.cold, paddingTop: 14, paddingBottom: 14, borderTopColor: _designSystem.colors.goora, borderTopWidth: 2, borderBottomWidth: 2, borderBottomColor: '#c8c8c8' } },
-    label ? _react2['default'].createElement(
+    label ? _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 1, flexDirection: 'row', justifyContent: 'center' } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Large'], { color: _designSystem.colors.pandra }) },
+        { style: _extends({}, _designSystem.fonts['Large'], { color: _designSystem.colors.pandra }) },
         label
       )
-    ) : _react2['default'].createElement(
+    ) : _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 1, flexDirection: 'row', justifyContent: 'center' } },
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 18, borderWidth: 1, borderColor: _designSystem.colors.pandra, height: 18, marginTop: 6, marginRight: 16, borderRadius: 9 } }),
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 18, borderWidth: 1, borderColor: _designSystem.colors.pandra, height: 18, marginTop: 6, marginRight: 16, borderRadius: 9 } }),
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 18, borderWidth: 1, borderColor: _designSystem.colors.pandra, height: 18, marginTop: 6, borderRadius: 9 } })
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 18, borderWidth: 1, borderColor: _designSystem.colors.pandra, height: 18, marginTop: 6, marginRight: 16, borderRadius: 9 } }),
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 18, borderWidth: 1, borderColor: _designSystem.colors.pandra, height: 18, marginTop: 6, marginRight: 16, borderRadius: 9 } }),
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 18, borderWidth: 1, borderColor: _designSystem.colors.pandra, height: 18, marginTop: 6, borderRadius: 9 } })
     )
   );
 };
-exports['default'] = BottomButton;
+
+exports.default = BottomButton;
 
 /***/ }),
-/* 80 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -7788,18 +7808,18 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BasicButton = function BasicButton(_ref) {
   var title = _ref.title;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.pandra } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Small'], {
+      { style: _extends({}, _designSystem.fonts['Small'], {
           marginTop: 12,
           marginLeft: 48,
           marginBottom: 44,
@@ -7811,15 +7831,21 @@ var BasicButton = function BasicButton(_ref) {
     )
   );
 };
-exports['default'] = BasicButton;
+
+exports.default = BasicButton;
 
 /***/ }),
-/* 81 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -7827,19 +7853,19 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RdRow = function RdRow(_ref) {
   var title = _ref.title,
       button = _ref.button;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.pandra, paddingTop: 32 } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Title 4'], {
+      { style: _extends({}, _designSystem.fonts['Title 4'], {
           flex: 1,
           marginLeft: 48,
           borderColor: _designSystem.colors.goora,
@@ -7848,9 +7874,9 @@ var RdRow = function RdRow(_ref) {
         }) },
       title
     ),
-    button ? _react2['default'].createElement(
+    button ? _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Small'], {
+      { style: _extends({}, _designSystem.fonts['Small'], {
           marginRight: 16,
           marginTop: 6,
           color: _designSystem.colors['hirva']
@@ -7859,15 +7885,21 @@ var RdRow = function RdRow(_ref) {
     ) : null
   );
 };
-exports['default'] = RdRow;
+
+exports.default = RdRow;
 
 /***/ }),
-/* 82 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -7875,208 +7907,166 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-var _textBox = __webpack_require__(42);
-
-var _textBox2 = _interopRequireDefault(_textBox);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var SearchNav = function SearchNav(_ref) {
-  var title = _ref.title,
-      button = _ref.button,
-      focus = _ref.focus;
-  return _react2['default'].createElement(
-    _reactSketchapp.View,
-    { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.pandra, paddingTop: 4, paddingBottom: 4, borderColor: focus ? _designSystem.colors.kala : _designSystem.colors.goora, borderBottomWidth: 2 } },
-    _react2['default'].createElement(
-      _reactSketchapp.View,
-      { style: { flex: 1 } },
-      _react2['default'].createElement(_textBox2['default'], { value: '', placeholder: 'Search', icon: true, margin: 16 })
-    ),
-    button ? _react2['default'].createElement(
-      _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Small'], {
-          marginRight: 16,
-          marginTop: 32,
-          color: _designSystem.colors['hirva']
-        }) },
-      button
-    ) : null
-  );
-};
-
-exports['default'] = SearchNav;
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactSketchapp = __webpack_require__(2);
-
-var _designSystem = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // type P = {
 //   title: string,
 //   children?: any,
 // };
 var Agenda = function Agenda() {
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     null,
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { paddingBottom: 16, paddingTop: 16, flexDirection: 'row', marginLeft: 16, marginRight: 16 } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Sun'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
           '22'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.cold }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.cold }) },
           'Mon'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { backgroundColor: _designSystem.colors.cold, paddingBottom: 2, borderRadius: '50%' } },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             _reactSketchapp.Text,
-            { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.pandra }) },
+            { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.pandra }) },
             '23'
           ),
-          _react2['default'].createElement(
+          _react2.default.createElement(
             _reactSketchapp.Text,
             { style: { fontSize: 24, lineHeight: 4, textAlign: 'center', color: _designSystem.colors.pandra } },
             '.'
           )
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Tue'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
           '24'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
           { style: { fontSize: 24, lineHeight: 4, textAlign: 'center', color: _designSystem.colors.cold } },
           '.'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Wen'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
           '25'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Thu'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
           '26'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
           { style: { fontSize: 24, lineHeight: 4, textAlign: 'center', color: _designSystem.colors.cold } },
           '.'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Fri'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
           '27'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
           { style: { fontSize: 24, lineHeight: 4, textAlign: 'center', color: _designSystem.colors.cold } },
           '.'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Sat'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.kala }) },
           '28'
         )
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flexDirection: 'row', justifyContent: 'center', paddingTop: 8, paddingBottom: 8 } },
-      _react2['default'].createElement(_reactSketchapp.View, { style: { width: 48, height: 8, borderRadius: 4, backgroundColor: _designSystem.colors.pandra } })
+      _react2.default.createElement(_reactSketchapp.View, { style: { width: 48, height: 8, borderRadius: 4, backgroundColor: _designSystem.colors.pandra } })
     )
   );
 };
-exports['default'] = Agenda;
+
+exports.default = Agenda;
 
 /***/ }),
-/* 84 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -8084,34 +8074,36 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DateRow = function DateRow(_ref) {
   var title = _ref.title,
       subtitle = _ref.subtitle,
       date = _ref.date,
       day = _ref.day,
-      children = _ref.children;
-  return _react2['default'].createElement(
+      children = _ref.children,
+      first = _ref.first,
+      last = _ref.last;
+  return _react2.default.createElement(
     _reactSketchapp.View,
-    { style: { flexDirection: 'row' } },
-    _react2['default'].createElement(
+    { style: { flexDirection: 'row', marginTop: first ? 16 : 2, marginBottom: last ? 16 : 2 } },
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flexDirection: 'column', width: 24, marginLeft: 12, marginRight: 10 } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Large'], { color: _designSystem.colors.savla, textAlign: 'center' }) },
+        { style: _extends({}, _designSystem.fonts['Large'], { color: _designSystem.colors.savla, textAlign: 'center' }) },
         date
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Micro'], { color: _designSystem.colors.savla, textAlign: 'center' }) },
+        { style: _extends({}, _designSystem.fonts['Micro'], { color: _designSystem.colors.savla, textAlign: 'center' }) },
         day
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: {
           flex: 1,
@@ -8129,11 +8121,15 @@ var DateRow = function DateRow(_ref) {
     )
   );
 };
-exports['default'] = DateRow;
+
+exports.default = DateRow;
 
 /***/ }),
-/* 85 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8145,11 +8141,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
 var _designSystem2 = _interopRequireDefault(_designSystem);
 
-var _activity = __webpack_require__(157);
+var _activity = __webpack_require__(155);
 
 var _activity2 = _interopRequireDefault(_activity);
 
@@ -8161,24 +8157,26 @@ var _styleguide = __webpack_require__(167);
 
 var _styleguide2 = _interopRequireDefault(_styleguide);
 
-var _screen = __webpack_require__(173);
+var _main = __webpack_require__(173);
 
-var _screen2 = _interopRequireDefault(_screen);
+var _main2 = _interopRequireDefault(_main);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports['default'] = function () {
+exports.default = function () {
   _reactSketchapp.TextStyles.create({
     context: context,
     clearExistingStyles: true
-  }, _designSystem2['default'].fonts);
+  }, _designSystem2.default.fonts);
 
-  (0, _reactSketchapp.render)(_react2['default'].createElement(_screen2['default'], { system: _designSystem2['default'] }), context.document.currentPage());
+  (0, _reactSketchapp.render)(_react2.default.createElement(_main2.default, { system: _designSystem2.default }), context.document.currentPage());
 };
+// import Screen from './screen';
+
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 /***/ }),
-/* 86 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8192,11 +8190,11 @@ exports['default'] = function () {
 
 
 
-var PooledClass = __webpack_require__(87);
-var ReactElement = __webpack_require__(11);
+var PooledClass = __webpack_require__(85);
+var ReactElement = __webpack_require__(13);
 
-var emptyFunction = __webpack_require__(15);
-var traverseAllChildren = __webpack_require__(88);
+var emptyFunction = __webpack_require__(16);
+var traverseAllChildren = __webpack_require__(86);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
 var fourArgumentPooler = PooledClass.fourArgumentPooler;
@@ -8372,7 +8370,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 /***/ }),
-/* 87 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8387,9 +8385,9 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(13);
+var _prodInvariant = __webpack_require__(15);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 /**
  * Static poolers. Several custom versions for each potential number of
@@ -8488,7 +8486,7 @@ module.exports = PooledClass;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 88 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8502,14 +8500,14 @@ module.exports = PooledClass;
 
 
 
-var _prodInvariant = __webpack_require__(13);
+var _prodInvariant = __webpack_require__(15);
 
-var ReactCurrentOwner = __webpack_require__(10);
+var ReactCurrentOwner = __webpack_require__(11);
 var REACT_ELEMENT_TYPE = __webpack_require__(48);
 
 var getIteratorFn = __webpack_require__(49);
-var invariant = __webpack_require__(4);
-var KeyEscapeUtils = __webpack_require__(89);
+var invariant = __webpack_require__(3);
+var KeyEscapeUtils = __webpack_require__(87);
 var warning = __webpack_require__(5);
 
 var SEPARATOR = '.';
@@ -8668,7 +8666,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 89 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8730,7 +8728,7 @@ var KeyEscapeUtils = {
 module.exports = KeyEscapeUtils;
 
 /***/ }),
-/* 90 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8744,7 +8742,7 @@ module.exports = KeyEscapeUtils;
 
 
 
-var ReactElement = __webpack_require__(11);
+var ReactElement = __webpack_require__(13);
 
 /**
  * Create a factory that creates HTML tag elements.
@@ -8903,7 +8901,7 @@ module.exports = ReactDOMFactories;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 91 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8917,12 +8915,12 @@ module.exports = ReactDOMFactories;
 
 
 
-var _prodInvariant = __webpack_require__(13);
+var _prodInvariant = __webpack_require__(15);
 
-var ReactPropTypeLocationNames = __webpack_require__(92);
-var ReactPropTypesSecret = __webpack_require__(93);
+var ReactPropTypeLocationNames = __webpack_require__(90);
+var ReactPropTypesSecret = __webpack_require__(91);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
 
 var ReactComponentTreeHook;
@@ -8994,7 +8992,7 @@ module.exports = checkReactTypeSpec;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 92 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9023,7 +9021,7 @@ module.exports = ReactPropTypeLocationNames;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 93 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9043,7 +9041,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 94 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9057,15 +9055,15 @@ module.exports = ReactPropTypesSecret;
 
 
 
-var _require = __webpack_require__(11),
+var _require = __webpack_require__(13),
     isValidElement = _require.isValidElement;
 
-var factory = __webpack_require__(95);
+var factory = __webpack_require__(93);
 
 module.exports = factory(isValidElement);
 
 /***/ }),
-/* 95 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9091,7 +9089,7 @@ module.exports = function(isValidElement) {
 
 
 /***/ }),
-/* 96 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9105,7 +9103,7 @@ module.exports = function(isValidElement) {
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(4);
+  var invariant = __webpack_require__(3);
   var warning = __webpack_require__(5);
   var ReactPropTypesSecret = __webpack_require__(30);
   var loggedTypeFailures = {};
@@ -9158,7 +9156,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 97 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9175,7 +9173,7 @@ module.exports = checkPropTypes;
 module.exports = '15.6.2';
 
 /***/ }),
-/* 98 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9192,16 +9190,16 @@ module.exports = '15.6.2';
 var _require = __webpack_require__(46),
     Component = _require.Component;
 
-var _require2 = __webpack_require__(11),
+var _require2 = __webpack_require__(13),
     isValidElement = _require2.isValidElement;
 
 var ReactNoopUpdateQueue = __webpack_require__(47);
-var factory = __webpack_require__(99);
+var factory = __webpack_require__(97);
 
 module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
 
 /***/ }),
-/* 99 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9218,7 +9216,7 @@ module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
 var _assign = __webpack_require__(7);
 
 var emptyObject = __webpack_require__(25);
-var _invariant = __webpack_require__(4);
+var _invariant = __webpack_require__(3);
 
 if (process.env.NODE_ENV !== 'production') {
   var warning = __webpack_require__(5);
@@ -10079,7 +10077,7 @@ module.exports = factory;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 100 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10092,11 +10090,11 @@ module.exports = factory;
  */
 
 
-var _prodInvariant = __webpack_require__(13);
+var _prodInvariant = __webpack_require__(15);
 
-var ReactElement = __webpack_require__(11);
+var ReactElement = __webpack_require__(13);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 /**
  * Returns the first child in a collection of children and verifies that there
@@ -10121,17 +10119,17 @@ module.exports = onlyChild;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 101 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(102);
+module.exports = __webpack_require__(100);
 
 
 /***/ }),
-/* 102 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10154,16 +10152,16 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ReactComponentEnvironment = __webpack_require__(32);
-var ReactDefaultBatchingStrategy = __webpack_require__(103);
+var ReactDefaultBatchingStrategy = __webpack_require__(101);
 var ReactEmptyComponent = __webpack_require__(56);
-var ReactMultiChild = __webpack_require__(112);
+var ReactMultiChild = __webpack_require__(110);
 var ReactHostComponent = __webpack_require__(60);
-var ReactTestMount = __webpack_require__(124);
-var ReactTestReconcileTransaction = __webpack_require__(126);
+var ReactTestMount = __webpack_require__(122);
+var ReactTestReconcileTransaction = __webpack_require__(124);
 var ReactUpdates = __webpack_require__(26);
-var ReactTestTextComponent = __webpack_require__(128);
-var ReactTestEmptyComponent = __webpack_require__(129);
-var invariant = __webpack_require__(4);
+var ReactTestTextComponent = __webpack_require__(126);
+var ReactTestEmptyComponent = __webpack_require__(127);
+var invariant = __webpack_require__(3);
 
 /**
  * Drill down (through composites and empty components) until we get a native or
@@ -10276,7 +10274,7 @@ module.exports = ReactTestRenderer;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 103 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10295,7 +10293,7 @@ var _assign = __webpack_require__(7);
 var ReactUpdates = __webpack_require__(26);
 var Transaction = __webpack_require__(34);
 
-var emptyFunction = __webpack_require__(15);
+var emptyFunction = __webpack_require__(16);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -10347,7 +10345,7 @@ var ReactDefaultBatchingStrategy = {
 module.exports = ReactDefaultBatchingStrategy;
 
 /***/ }),
-/* 104 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10372,7 +10370,7 @@ var ReactFeatureFlags = {
 module.exports = ReactFeatureFlags;
 
 /***/ }),
-/* 105 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10387,7 +10385,7 @@ module.exports = ReactFeatureFlags;
 
 
 
-var ReactOwner = __webpack_require__(106);
+var ReactOwner = __webpack_require__(104);
 
 var ReactRef = {};
 
@@ -10464,7 +10462,7 @@ ReactRef.detachRefs = function (instance, element) {
 module.exports = ReactRef;
 
 /***/ }),
-/* 106 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10481,7 +10479,7 @@ module.exports = ReactRef;
 
 var _prodInvariant = __webpack_require__(6);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 /**
  * @param {?object} object
@@ -10561,7 +10559,7 @@ module.exports = ReactOwner;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 107 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10576,12 +10574,12 @@ module.exports = ReactOwner;
 
 
 
-var ReactInvalidSetStateWarningHook = __webpack_require__(108);
-var ReactHostOperationHistoryHook = __webpack_require__(109);
+var ReactInvalidSetStateWarningHook = __webpack_require__(106);
+var ReactHostOperationHistoryHook = __webpack_require__(107);
 var ReactComponentTreeHook = __webpack_require__(9);
 var ExecutionEnvironment = __webpack_require__(55);
 
-var performanceNow = __webpack_require__(110);
+var performanceNow = __webpack_require__(108);
 var warning = __webpack_require__(5);
 
 var hooks = [];
@@ -10926,7 +10924,7 @@ module.exports = ReactDebugTool;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 108 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10967,7 +10965,7 @@ module.exports = ReactInvalidSetStateWarningHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 109 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11004,7 +11002,7 @@ var ReactHostOperationHistoryHook = {
 module.exports = ReactHostOperationHistoryHook;
 
 /***/ }),
-/* 110 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11019,7 +11017,7 @@ module.exports = ReactHostOperationHistoryHook;
  * @typechecks
  */
 
-var performance = __webpack_require__(111);
+var performance = __webpack_require__(109);
 
 var performanceNow;
 
@@ -11041,7 +11039,7 @@ if (performance.now) {
 module.exports = performanceNow;
 
 /***/ }),
-/* 111 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11067,7 +11065,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = performance || {};
 
 /***/ }),
-/* 112 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11087,13 +11085,13 @@ var ReactComponentEnvironment = __webpack_require__(32);
 var ReactInstanceMap = __webpack_require__(35);
 var ReactInstrumentation = __webpack_require__(27);
 
-var ReactCurrentOwner = __webpack_require__(10);
+var ReactCurrentOwner = __webpack_require__(11);
 var ReactReconciler = __webpack_require__(20);
-var ReactChildReconciler = __webpack_require__(113);
+var ReactChildReconciler = __webpack_require__(111);
 
-var emptyFunction = __webpack_require__(15);
-var flattenChildren = __webpack_require__(123);
-var invariant = __webpack_require__(4);
+var emptyFunction = __webpack_require__(16);
+var flattenChildren = __webpack_require__(121);
+var invariant = __webpack_require__(3);
 
 /**
  * Make an update for markup to be rendered and inserted at a supplied index.
@@ -11517,7 +11515,7 @@ module.exports = ReactMultiChild;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 113 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11674,7 +11672,7 @@ module.exports = ReactChildReconciler;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 114 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11693,20 +11691,20 @@ var _prodInvariant = __webpack_require__(6),
 
 var React = __webpack_require__(23);
 var ReactComponentEnvironment = __webpack_require__(32);
-var ReactCurrentOwner = __webpack_require__(10);
-var ReactErrorUtils = __webpack_require__(115);
+var ReactCurrentOwner = __webpack_require__(11);
+var ReactErrorUtils = __webpack_require__(113);
 var ReactInstanceMap = __webpack_require__(35);
 var ReactInstrumentation = __webpack_require__(27);
 var ReactNodeTypes = __webpack_require__(58);
 var ReactReconciler = __webpack_require__(20);
 
 if (process.env.NODE_ENV !== 'production') {
-  var checkReactTypeSpec = __webpack_require__(116);
+  var checkReactTypeSpec = __webpack_require__(114);
 }
 
 var emptyObject = __webpack_require__(25);
-var invariant = __webpack_require__(4);
-var shallowEqual = __webpack_require__(119);
+var invariant = __webpack_require__(3);
+var shallowEqual = __webpack_require__(117);
 var shouldUpdateReactComponent = __webpack_require__(59);
 var warning = __webpack_require__(5);
 
@@ -12578,7 +12576,7 @@ module.exports = ReactCompositeComponent;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 115 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12660,7 +12658,7 @@ module.exports = ReactErrorUtils;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 116 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12676,10 +12674,10 @@ module.exports = ReactErrorUtils;
 
 var _prodInvariant = __webpack_require__(6);
 
-var ReactPropTypeLocationNames = __webpack_require__(117);
-var ReactPropTypesSecret = __webpack_require__(118);
+var ReactPropTypeLocationNames = __webpack_require__(115);
+var ReactPropTypesSecret = __webpack_require__(116);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
 
 var ReactComponentTreeHook;
@@ -12751,7 +12749,7 @@ module.exports = checkReactTypeSpec;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 117 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12780,7 +12778,7 @@ module.exports = ReactPropTypeLocationNames;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 118 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12800,7 +12798,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 119 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12871,7 +12869,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 120 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12895,7 +12893,7 @@ function getNextDebugID() {
 module.exports = getNextDebugID;
 
 /***/ }),
-/* 121 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12918,7 +12916,7 @@ var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol
 module.exports = REACT_ELEMENT_TYPE;
 
 /***/ }),
-/* 122 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12962,7 +12960,7 @@ function getIteratorFn(maybeIterable) {
 module.exports = getIteratorFn;
 
 /***/ }),
-/* 123 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13042,7 +13040,7 @@ module.exports = flattenChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 124 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13064,9 +13062,9 @@ var ReactReconciler = __webpack_require__(20);
 var ReactUpdates = __webpack_require__(26);
 
 var emptyObject = __webpack_require__(25);
-var getHostComponentFromComposite = __webpack_require__(125);
+var getHostComponentFromComposite = __webpack_require__(123);
 var instantiateReactComponent = __webpack_require__(57);
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 
 var defaultTestOptions = {
   createNodeMock: function () {
@@ -13180,7 +13178,7 @@ module.exports = ReactTestMount;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 125 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13213,7 +13211,7 @@ function getHostComponentFromComposite(inst) {
 module.exports = getHostComponentFromComposite;
 
 /***/ }),
-/* 126 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13232,7 +13230,7 @@ var _assign = __webpack_require__(7);
 var CallbackQueue = __webpack_require__(54);
 var PooledClass = __webpack_require__(33);
 var Transaction = __webpack_require__(34);
-var ReactUpdateQueue = __webpack_require__(127);
+var ReactUpdateQueue = __webpack_require__(125);
 
 /**
  * Provides a `CallbackQueue` queue for collecting `onDOMReady` callbacks during
@@ -13345,7 +13343,7 @@ PooledClass.addPoolingTo(ReactTestReconcileTransaction);
 module.exports = ReactTestReconcileTransaction;
 
 /***/ }),
-/* 127 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13361,12 +13359,12 @@ module.exports = ReactTestReconcileTransaction;
 
 var _prodInvariant = __webpack_require__(6);
 
-var ReactCurrentOwner = __webpack_require__(10);
+var ReactCurrentOwner = __webpack_require__(11);
 var ReactInstanceMap = __webpack_require__(35);
 var ReactInstrumentation = __webpack_require__(27);
 var ReactUpdates = __webpack_require__(26);
 
-var invariant = __webpack_require__(4);
+var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
 
 function enqueueUpdate(internalInstance) {
@@ -13583,7 +13581,7 @@ module.exports = ReactUpdateQueue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 128 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13627,7 +13625,7 @@ var ReactTestTextComponent = function () {
 module.exports = ReactTestTextComponent;
 
 /***/ }),
-/* 129 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13667,7 +13665,7 @@ var ReactTestEmptyComponent = function () {
 module.exports = ReactTestEmptyComponent;
 
 /***/ }),
-/* 130 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// UMD (Universal Module Definition)
@@ -14890,7 +14888,7 @@ if (true) {
 
 
 /***/ }),
-/* 131 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14939,7 +14937,7 @@ var Context = function () {
 module.exports = Context;
 
 /***/ }),
-/* 132 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14991,7 +14989,7 @@ var createStringMeasurer = function createStringMeasurer(string, style) {
 module.exports = createStringMeasurer;
 
 /***/ }),
-/* 133 */
+/* 131 */
 /***/ (function(module, exports) {
 
 /**
@@ -15043,7 +15041,7 @@ module.exports = function murmur2js(str) {
 
 
 /***/ }),
-/* 134 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15068,7 +15066,7 @@ var sortObjectKeys = function sortObjectKeys(obj) {
 exports.default = sortObjectKeys;
 
 /***/ }),
-/* 135 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15076,18 +15074,18 @@ exports.default = sortObjectKeys;
 
 /* eslint-disable global-require */
 var renderers = {
-  artboard: __webpack_require__(136),
-  image: __webpack_require__(139),
-  text: __webpack_require__(141),
+  artboard: __webpack_require__(134),
+  image: __webpack_require__(137),
+  text: __webpack_require__(139),
   view: __webpack_require__(69),
-  symbolinstance: __webpack_require__(144),
-  symbolmaster: __webpack_require__(147)
+  symbolinstance: __webpack_require__(142),
+  symbolmaster: __webpack_require__(145)
 };
 
 module.exports = renderers;
 
 /***/ }),
-/* 136 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15097,7 +15095,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _models = __webpack_require__(8);
 
-var _SketchRenderer2 = __webpack_require__(16);
+var _SketchRenderer2 = __webpack_require__(17);
 
 var _SketchRenderer3 = _interopRequireDefault(_SketchRenderer2);
 
@@ -15149,7 +15147,7 @@ var ArtboardRenderer = function (_SketchRenderer) {
 module.exports = ArtboardRenderer;
 
 /***/ }),
-/* 137 */
+/* 135 */
 /***/ (function(module, exports) {
 
 /*
@@ -15518,7 +15516,7 @@ module.exports = normalizeColor;
 
 
 /***/ }),
-/* 138 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15571,7 +15569,7 @@ var layerGroup = function layerGroup(x, y, width, height, opacity) {
 exports.default = layerGroup;
 
 /***/ }),
-/* 139 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15581,9 +15579,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _sketchConstants = __webpack_require__(21);
 
-var _constants = __webpack_require__(140);
+var _constants = __webpack_require__(138);
 
-var _SketchRenderer2 = __webpack_require__(16);
+var _SketchRenderer2 = __webpack_require__(17);
 
 var _SketchRenderer3 = _interopRequireDefault(_SketchRenderer2);
 
@@ -15782,7 +15780,7 @@ var ImageRenderer = function (_SketchRenderer) {
 module.exports = ImageRenderer;
 
 /***/ }),
-/* 140 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15803,7 +15801,7 @@ var PatternFillType = exports.PatternFillType = {
 };
 
 /***/ }),
-/* 141 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15811,7 +15809,7 @@ var PatternFillType = exports.PatternFillType = {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _SketchRenderer2 = __webpack_require__(16);
+var _SketchRenderer2 = __webpack_require__(17);
 
 var _SketchRenderer3 = _interopRequireDefault(_SketchRenderer2);
 
@@ -15819,7 +15817,7 @@ var _ViewRenderer = __webpack_require__(69);
 
 var _ViewRenderer2 = _interopRequireDefault(_ViewRenderer);
 
-var _textLayers = __webpack_require__(142);
+var _textLayers = __webpack_require__(140);
 
 var _textLayers2 = _interopRequireDefault(_textLayers);
 
@@ -15878,7 +15876,7 @@ var TextRenderer = function (_SketchRenderer) {
 module.exports = TextRenderer;
 
 /***/ }),
-/* 142 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15923,7 +15921,7 @@ var makeTextLayer = function makeTextLayer(frame) {
 exports.default = makeTextLayer;
 
 /***/ }),
-/* 143 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15994,7 +15992,7 @@ var TextStyles = function () {
 exports.default = new TextStyles();
 
 /***/ }),
-/* 144 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16004,7 +16002,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _SketchRenderer2 = __webpack_require__(16);
+var _SketchRenderer2 = __webpack_require__(17);
 
 var _SketchRenderer3 = _interopRequireDefault(_SketchRenderer2);
 
@@ -16204,7 +16202,7 @@ var SymbolInstanceRenderer = function (_SketchRenderer) {
 module.exports = SymbolInstanceRenderer;
 
 /***/ }),
-/* 145 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16217,8 +16215,8 @@ module.exports = SymbolInstanceRenderer;
 
 
 
-var emptyFunction = __webpack_require__(15);
-var invariant = __webpack_require__(4);
+var emptyFunction = __webpack_require__(16);
+var invariant = __webpack_require__(3);
 var ReactPropTypesSecret = __webpack_require__(30);
 
 module.exports = function() {
@@ -16269,7 +16267,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 146 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16395,7 +16393,7 @@ var expandStyle = function expandStyle(style) {
 module.exports = expandStyle;
 
 /***/ }),
-/* 147 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16405,7 +16403,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _models = __webpack_require__(8);
 
-var _SketchRenderer2 = __webpack_require__(16);
+var _SketchRenderer2 = __webpack_require__(17);
 
 var _SketchRenderer3 = _interopRequireDefault(_SketchRenderer2);
 
@@ -16441,7 +16439,7 @@ var SymbolMasterRenderer = function (_SketchRenderer) {
 module.exports = SymbolMasterRenderer;
 
 /***/ }),
-/* 148 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
@@ -16450,7 +16448,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     /* istanbul ignore next */
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(149)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(147)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -16641,7 +16639,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 149 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
@@ -16761,7 +16759,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 150 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16770,7 +16768,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 module.exports = {};
 
 /***/ }),
-/* 151 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16790,7 +16788,7 @@ var Platform = {
 exports.default = Platform;
 
 /***/ }),
-/* 152 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16804,7 +16802,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(14);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -16864,7 +16862,7 @@ Artboard.propTypes = propTypes;
 module.exports = Artboard;
 
 /***/ }),
-/* 153 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16882,7 +16880,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(14);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -16996,18 +16994,21 @@ Image.propTypes = propTypes;
 exports.default = Image;
 
 /***/ }),
-/* 154 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _chromaJs = __webpack_require__(155);
+var _chromaJs = __webpack_require__(153);
 
 var _chromaJs2 = _interopRequireDefault(_chromaJs);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var minimums = {
   aa: 4.5,
@@ -17017,8 +17018,8 @@ var minimums = {
 };
 /* eslint-disable import/no-extraneous-dependencies */
 
-exports['default'] = function (hex) {
-  var contrast = _chromaJs2['default'].contrast(hex, 'white');
+exports.default = function (hex) {
+  var contrast = _chromaJs2.default.contrast(hex, 'white');
   return {
     hex: hex,
     contrast: contrast,
@@ -17032,7 +17033,7 @@ exports['default'] = function (hex) {
 };
 
 /***/ }),
-/* 155 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, console) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
@@ -19744,10 +19745,10 @@ exports['default'] = function (hex) {
 
 }).call(this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(156)(module), __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(154)(module), __webpack_require__(10)))
 
 /***/ }),
-/* 156 */
+/* 154 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -19775,12 +19776,18 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 157 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+/* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 var _react = __webpack_require__(1);
 
@@ -19788,13 +19795,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
 var _Label = __webpack_require__(12);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-var _Cell = __webpack_require__(158);
+var _Cell = __webpack_require__(156);
 
 var _Cell2 = _interopRequireDefault(_Cell);
 
@@ -19806,7 +19813,7 @@ var _Section = __webpack_require__(39);
 
 var _Section2 = _interopRequireDefault(_Section);
 
-var _Calendar = __webpack_require__(160);
+var _Calendar = __webpack_require__(158);
 
 var _Calendar2 = _interopRequireDefault(_Calendar);
 
@@ -19818,15 +19825,15 @@ var _BottomTabNav = __webpack_require__(41);
 
 var _BottomTabNav2 = _interopRequireDefault(_BottomTabNav);
 
-var _Row = __webpack_require__(76);
+var _Row = __webpack_require__(159);
 
 var _Row2 = _interopRequireDefault(_Row);
 
-var _ActivityRow = __webpack_require__(161);
+var _ActivityRow = __webpack_require__(160);
 
 var _ActivityRow2 = _interopRequireDefault(_ActivityRow);
 
-var _ldRow = __webpack_require__(77);
+var _ldRow = __webpack_require__(76);
 
 var _ldRow2 = _interopRequireDefault(_ldRow);
 
@@ -19834,23 +19841,23 @@ var _textBox = __webpack_require__(42);
 
 var _textBox2 = _interopRequireDefault(_textBox);
 
-var _BackNav = __webpack_require__(78);
+var _BackNav = __webpack_require__(77);
 
 var _BackNav2 = _interopRequireDefault(_BackNav);
 
-var _bottomButton = __webpack_require__(79);
+var _bottomButton = __webpack_require__(78);
 
 var _bottomButton2 = _interopRequireDefault(_bottomButton);
 
-var _basicButton = __webpack_require__(80);
+var _basicButton = __webpack_require__(79);
 
 var _basicButton2 = _interopRequireDefault(_basicButton);
 
-var _rdRow = __webpack_require__(81);
+var _rdRow = __webpack_require__(80);
 
 var _rdRow2 = _interopRequireDefault(_rdRow);
 
-var _Dot = __webpack_require__(162);
+var _Dot = __webpack_require__(161);
 
 var _Dot2 = _interopRequireDefault(_Dot);
 
@@ -19858,263 +19865,262 @@ var _resultRow = __webpack_require__(43);
 
 var _resultRow2 = _interopRequireDefault(_resultRow);
 
-var _SearchNav = __webpack_require__(82);
+var _SearchNav = __webpack_require__(162);
 
 var _SearchNav2 = _interopRequireDefault(_SearchNav);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Document = function Document(_ref) {
   var system = _ref.system;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     null,
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { name: 'Intro', style: { width: 420, marginBottom: system.spacing * 4 } },
-      _react2['default'].createElement(
-        _Label2['default'],
+      _react2.default.createElement(
+        _Label2.default,
         null,
         'KMW design for Activity Management Screens.'
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Dashboard Screen with Tabs' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_PageNav2['default'], { title: 'Activity Manager', leftIcon: 'down-arrow.svg' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_PageNav2.default, { title: 'Activity Manager', leftIcon: 'down-arrow.svg' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_Calendar2['default'], { selected: '23' })
+          _react2.default.createElement(_Calendar2.default, { selected: '23' })
         ),
-        _react2['default'].createElement(_BottomTabNav2['default'], null)
+        _react2.default.createElement(_BottomTabNav2.default, null)
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Dashboard Screen with Tabs' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_PageNav2['default'], { title: 'Activity Manager', leftIcon: 'down-arrow.svg' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_PageNav2.default, { title: 'Activity Manager', leftIcon: 'down-arrow.svg' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_Calendar2['default'], { selected: '30' }),
-          _react2['default'].createElement(
-            _Row2['default'],
+          _react2.default.createElement(_Calendar2.default, { selected: '30' }),
+          _react2.default.createElement(
+            _Row2.default,
             { first: true },
-            _react2['default'].createElement(_ActivityRow2['default'], { margin: 12, type: 'Campaign Van', towns: ["Shirur", "Shikrapur", "Sharur", "Sharir", "Shamin", "Shahim"], members: ['A', 'B', 'C'] })
+            _react2.default.createElement(_ActivityRow2.default, { margin: 12, type: 'Campaign Van', towns: ["Shirur", "Shikrapur", "Sharur", "Sharir", "Shamin", "Shahim"], members: ['A', 'B', 'C'] })
           )
         ),
-        _react2['default'].createElement(_BottomTabNav2['default'], null)
+        _react2.default.createElement(_BottomTabNav2.default, null)
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Dashboard Screen with Tabs' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_PageNav2['default'], { title: 'Activity Manager', leftIcon: 'down-arrow.svg' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_PageNav2.default, { title: 'Activity Manager', leftIcon: 'down-arrow.svg' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_Calendar2['default'], { selected: '16' }),
-          _react2['default'].createElement(
-            _Row2['default'],
+          _react2.default.createElement(_Calendar2.default, { selected: '16' }),
+          _react2.default.createElement(
+            _Row2.default,
             { first: true },
-            _react2['default'].createElement(_ActivityRow2['default'], { margin: 12, type: 'Campaign Van', towns: ["Shirur", "Shikrapur", "Sharur", "Sharir", "Shamin", "Shahim"], members: ['MM', 'AS', 'KP'] }),
-            _react2['default'].createElement(
+            _react2.default.createElement(_ActivityRow2.default, { margin: 12, type: 'Campaign Van', towns: ["Shirur", "Shikrapur", "Sharur", "Sharir", "Shamin", "Shahim"], members: ['MM', 'AS', 'KP'] }),
+            _react2.default.createElement(
               _reactSketchapp.View,
               { style: { flexDirection: 'row', justifyContent: 'center', paddingLeft: 16, paddingRight: 16, paddingBottom: 8 } },
-              _react2['default'].createElement(_Cell2['default'], { label: 'HOT', value: '12' }),
-              _react2['default'].createElement(_Cell2['default'], { label: 'Warm', value: '14' }),
-              _react2['default'].createElement(_Cell2['default'], { label: 'Cold', value: '3', last: true })
+              _react2.default.createElement(_Cell2.default, { label: 'HOT', value: '12' }),
+              _react2.default.createElement(_Cell2.default, { label: 'Warm', value: '14' }),
+              _react2.default.createElement(_Cell2.default, { label: 'Cold', value: '3', last: true })
             ),
-            _react2['default'].createElement(
+            _react2.default.createElement(
               _reactSketchapp.View,
               { style: { flexDirection: 'row', justifyContent: 'center', paddingLeft: 16, paddingRight: 16 } },
-              _react2['default'].createElement(_Cell2['default'], { label: 'Demo', value: '18' }),
-              _react2['default'].createElement(_Cell2['default'], { label: 'CUE', value: '9', last: true })
+              _react2.default.createElement(_Cell2.default, { label: 'Demo', value: '18' }),
+              _react2.default.createElement(_Cell2.default, { label: 'CUE', value: '9', last: true })
             ),
-            _react2['default'].createElement(
+            _react2.default.createElement(
               _reactSketchapp.View,
               { style: { flexDirection: 'row', justifyContent: 'center', paddingLeft: 16, paddingRight: 16 } },
-              _react2['default'].createElement(_Cell2['default'], { label: 'Reatil Finance', value: '3' }),
-              _react2['default'].createElement(_Cell2['default'], { label: 'Sale', value: '4', last: true })
+              _react2.default.createElement(_Cell2.default, { label: 'Reatil Finance', value: '3' }),
+              _react2.default.createElement(_Cell2.default, { label: 'Sale', value: '4', last: true })
             ),
-            _react2['default'].createElement(
+            _react2.default.createElement(
               _reactSketchapp.View,
               { style: { flexDirection: 'row', justifyContent: 'center', paddingLeft: 16, paddingRight: 16, paddingBottom: 24 } },
-              _react2['default'].createElement(_Cell2['default'], { label: 'Sale Feedback', value: '2' }),
-              _react2['default'].createElement(_Cell2['default'], { label: 'Non Sale Feedback', value: '18', last: true })
+              _react2.default.createElement(_Cell2.default, { label: 'Sale Feedback', value: '2' }),
+              _react2.default.createElement(_Cell2.default, { label: 'Non Sale Feedback', value: '18', last: true })
             )
           )
         ),
-        _react2['default'].createElement(_BottomTabNav2['default'], null)
+        _react2.default.createElement(_BottomTabNav2.default, null)
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'New Activity' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_BackNav2['default'], { title: 'New Activity', button: 'RESET' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_BackNav2.default, { title: 'New Activity', button: 'RESET' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1, backgroundColor: _designSystem.colors.pandra } },
-          _react2['default'].createElement(_textBox2['default'], { label: 'Activity type', first: true, focus: true, value: 'Campaign Van' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Location', value: '', placeholder: 'eg: Chandanki Chowk, Pune' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Members', first: true, placeholder: 'Staff Member' }),
-          _react2['default'].createElement(_textBox2['default'], { placeholder: 'Staff Member' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' })
+          _react2.default.createElement(_textBox2.default, { label: 'Activity type', first: true, focus: true, value: 'Campaign Van' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Location', value: '', placeholder: 'eg: Chandanki Chowk, Pune' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Members', first: true, placeholder: 'Staff Member' }),
+          _react2.default.createElement(_textBox2.default, { placeholder: 'Staff Member' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' })
         ),
-        _react2['default'].createElement(_bottomButton2['default'], { label: 'Save', disabled: true })
+        _react2.default.createElement(_bottomButton2.default, { label: 'Save', disabled: true })
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { marginBottom: 660 } },
-      _react2['default'].createElement(
-        _Section2['default'],
+      _react2.default.createElement(
+        _Section2.default,
         { title: 'New Activity' },
-        _react2['default'].createElement(
-          _Devices2['default'],
+        _react2.default.createElement(
+          _Devices2.default,
           { overflow: true },
-          _react2['default'].createElement(_BackNav2['default'], { title: 'New Activity', button: 'RESET' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Activity type', first: true, value: 'Campaign Van' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Location', value: 'Chandanki Chowk, Pune' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Location', value: 'Dange Chowk, Pune' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Members', first: true, value: 'Praful G' }),
-          _react2['default'].createElement(_textBox2['default'], { value: 'Mahesh M' }),
-          _react2['default'].createElement(_textBox2['default'], { last: true, value: 'Amit S' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' }),
-          _react2['default'].createElement(_bottomButton2['default'], { label: 'Save' })
+          _react2.default.createElement(_BackNav2.default, { title: 'New Activity', button: 'RESET' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Activity type', first: true, value: 'Campaign Van' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Location', value: 'Chandanki Chowk, Pune' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Location', value: 'Dange Chowk, Pune' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Members', first: true, value: 'Praful G' }),
+          _react2.default.createElement(_textBox2.default, { value: 'Mahesh M' }),
+          _react2.default.createElement(_textBox2.default, { last: true, value: 'Amit S' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' }),
+          _react2.default.createElement(_bottomButton2.default, { label: 'Save' })
         )
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { marginBottom: 600 } },
-      _react2['default'].createElement(
-        _Section2['default'],
+      _react2.default.createElement(
+        _Section2.default,
         { title: 'Activity Details 1' },
-        _react2['default'].createElement(
-          _Devices2['default'],
+        _react2.default.createElement(
+          _Devices2.default,
           { overflow: true },
-          _react2['default'].createElement(_BackNav2['default'], { title: 'Campaign Van', button: '12/10/17' }),
-          _react2['default'].createElement(
+          _react2.default.createElement(_BackNav2.default, { title: 'Campaign Van', button: '12/10/17' }),
+          _react2.default.createElement(
             _reactSketchapp.View,
             { style: { flexDirection: 'row', justifyContent: 'center', paddingTop: 12, paddingBottom: 12 } },
-            _react2['default'].createElement(_Dot2['default'], { size: 24, style: { marginRight: 12 }, selected: true }),
-            _react2['default'].createElement(_Dot2['default'], { size: 24 })
+            _react2.default.createElement(_Dot2.default, { size: 24, style: { marginRight: 12 }, selected: true }),
+            _react2.default.createElement(_Dot2.default, { size: 24 })
           ),
-          _react2['default'].createElement(_rdRow2['default'], { title: 'Activity Details', button: 'EDIT' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Activity type', first: true, value: 'Campaign Van' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Location', value: 'Chandanki Chowk, Pune' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Location', value: 'Dange Chowk, Pune' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Members', first: true, value: 'Praful G' }),
-          _react2['default'].createElement(_textBox2['default'], { value: 'Mahesh M' }),
-          _react2['default'].createElement(_textBox2['default'], { last: true, value: 'Amit S' })
+          _react2.default.createElement(_rdRow2.default, { title: 'Activity Details', button: 'EDIT' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Activity type', first: true, value: 'Campaign Van' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Location', value: 'Chandanki Chowk, Pune' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Location', value: 'Dange Chowk, Pune' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Members', first: true, value: 'Praful G' }),
+          _react2.default.createElement(_textBox2.default, { value: 'Mahesh M' }),
+          _react2.default.createElement(_textBox2.default, { last: true, value: 'Amit S' })
         )
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Activity Details 2' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         { overflow: true },
-        _react2['default'].createElement(_BackNav2['default'], { title: 'Campaign Van', button: '12/10/17' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_BackNav2.default, { title: 'Campaign Van', button: '12/10/17' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flexDirection: 'row', justifyContent: 'center', paddingTop: 12, paddingBottom: 12 } },
-          _react2['default'].createElement(_Dot2['default'], { size: 24, style: { marginRight: 12 } }),
-          _react2['default'].createElement(_Dot2['default'], { size: 24, selected: true })
+          _react2.default.createElement(_Dot2.default, { size: 24, style: { marginRight: 12 } }),
+          _react2.default.createElement(_Dot2.default, { size: 24, selected: true })
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_rdRow2['default'], { title: 'Enquiries', button: 'ADD' }),
-          _react2['default'].createElement(
-            _Row2['default'],
+          _react2.default.createElement(_rdRow2.default, { title: 'Enquiries', button: 'ADD' }),
+          _react2.default.createElement(
+            _Row2.default,
             null,
-            _react2['default'].createElement(_resultRow2['default'], { style: { paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24 }, first: true, title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+            _react2.default.createElement(_resultRow2.default, { style: { paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24 }, first: true, title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
           )
         ),
-        _react2['default'].createElement(_BottomTabNav2['default'], { middle: ' ' })
+        _react2.default.createElement(_BottomTabNav2.default, { middle: ' ' })
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Search' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         { overflow: true },
-        _react2['default'].createElement(_SearchNav2['default'], { title: 'Campaign Van', button: 'Cancel' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_SearchNav2.default, { title: 'Campaign Van', button: 'Cancel' }),
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Large'], { marginLeft: 16, marginRight: 16, marginTop: 32, marginBottom: 16, paddingLeft: 12, borderBottomWidth: 2, borderColor: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Large'], { marginLeft: 16, marginRight: 16, marginTop: 32, marginBottom: 16, paddingLeft: 12, borderBottomWidth: 2, borderColor: _designSystem.colors.savla }) },
           'Recent Searches'
         ),
-        _react2['default'].createElement(
-          _Row2['default'],
+        _react2.default.createElement(
+          _Row2.default,
           null,
-          _react2['default'].createElement(_resultRow2['default'], {
+          _react2.default.createElement(_resultRow2.default, {
             style: { paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24 },
             title: 'John Doe, Baramati',
             subtitle: 'Model X tractor, Hot Enquiry',
             status: ['HOT'] })
         ),
-        _react2['default'].createElement(
-          _Row2['default'],
+        _react2.default.createElement(
+          _Row2.default,
           null,
-          _react2['default'].createElement(_resultRow2['default'], { style: { paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24 }, first: true, title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+          _react2.default.createElement(_resultRow2.default, { style: { paddingLeft: 12, paddingRight: 16, paddingTop: 32, paddingBottom: 24 }, first: true, title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
         )
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'New Activity DEMO' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_BackNav2['default'], { title: 'New Activity', button: 'RESET' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_BackNav2.default, { title: 'New Activity', button: 'RESET' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flexDirection: 'row', justifyContent: 'center', paddingTop: 12, paddingBottom: 12 } },
-          _react2['default'].createElement(_Dot2['default'], { size: 24, style: { marginRight: 12 }, selected: true }),
-          _react2['default'].createElement(_Dot2['default'], { size: 24 })
+          _react2.default.createElement(_Dot2.default, { size: 24, style: { marginRight: 12 }, selected: true }),
+          _react2.default.createElement(_Dot2.default, { size: 24 })
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1, backgroundColor: _designSystem.colors.pandra } },
-          _react2['default'].createElement(_textBox2['default'], { label: 'Activity type', first: true, focus: true, value: 'DEMO' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Location', value: '', placeholder: 'eg: Chandanki Chowk, Pune' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Members', first: true, placeholder: 'Staff Member' }),
-          _react2['default'].createElement(_textBox2['default'], { placeholder: 'Staff Member' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' })
+          _react2.default.createElement(_textBox2.default, { label: 'Activity type', first: true, focus: true, value: 'DEMO' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Date', last: true, value: '23/10/2017', placeholder: '' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Location', value: '', placeholder: 'eg: Chandanki Chowk, Pune' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Members', first: true, placeholder: 'Staff Member' }),
+          _react2.default.createElement(_textBox2.default, { placeholder: 'Staff Member' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' })
         ),
-        _react2['default'].createElement(_bottomButton2['default'], { label: 'Save', disabled: true })
+        _react2.default.createElement(_bottomButton2.default, { label: 'Save', disabled: true })
       )
     )
   );
 };
-/* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
-exports['default'] = Document;
+exports.default = Document;
 
 // export default () => {
 //   TextStyles.create(
@@ -20165,12 +20171,17 @@ exports['default'] = Document;
 // </Text>
 
 /***/ }),
-/* 158 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -20178,31 +20189,31 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Cell = function Cell(_ref) {
   var label = _ref.label,
       value = _ref.value,
       last = _ref.last,
       style = _ref.style;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
-    { style: Object.assign({ flexDirection: 'row', flex: 1, marginRight: last ? 0 : 8 }, style) },
-    _react2['default'].createElement(
+    { style: _extends({ flexDirection: 'row', flex: 1, marginRight: last ? 0 : 8 }, style) },
+    _react2.default.createElement(
       _reactSketchapp.Text,
       {
-        style: Object.assign({}, _designSystem.fonts['Small'], {
+        style: _extends({}, _designSystem.fonts['Small'], {
           flex: 3
         })
       },
       label
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
       {
-        style: Object.assign({}, _designSystem.fonts['Small'], {
+        style: _extends({}, _designSystem.fonts['Small'], {
           color: _designSystem.colors.cold,
           flex: 1
         })
@@ -20211,11 +20222,15 @@ var Cell = function Cell(_ref) {
     )
   );
 };
-exports['default'] = Cell;
+
+exports.default = Cell;
 
 /***/ }),
-/* 159 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -20227,13 +20242,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
 var _Label = __webpack_require__(12);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -20243,22 +20258,27 @@ var Mobile = function Mobile(_ref) {
       children = _ref.children,
       name = _ref.name,
       overflow = _ref.overflow;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { name: name, style: _defineProperty({ width: width ? width : 360, height: height ? height : 640, flexDirection: 'column', borderColor: '#c8c8c8', borderWidth: 2, backgroundColor: _designSystem.colors.goora, marginRight: 108, overflow: overflow ? 'auto' : 'hidden' }, 'flexDirection', 'column') },
     children
   );
 };
 
-exports['default'] = Mobile;
+exports.default = Mobile;
 
 /***/ }),
-/* 160 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -20266,35 +20286,35 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Daterow = function Daterow(_ref) {
   var dates = _ref.dates,
       current = _ref.current,
       selected = _ref.selected;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { paddingBottom: 8, paddingTop: 8, flexDirection: 'row', marginLeft: 16, marginRight: 16 } },
     dates.map(function (date) {
-      return current.indexOf(date) === -1 ? _react2['default'].createElement(
+      return current.indexOf(date) === -1 ? _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1, backgroundColor: selected === date ? _designSystem.colors.cold : 'inherit', paddingBottom: 2 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: selected === date ? _designSystem.colors.pandra : _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: selected === date ? _designSystem.colors.pandra : _designSystem.colors.kala }) },
           date
         )
-      ) : _react2['default'].createElement(
+      ) : _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1, backgroundColor: selected === date ? _designSystem.colors.cold : 'inherit', paddingBottom: 2 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: selected === date ? _designSystem.colors.pandra : _designSystem.colors.kala }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: selected === date ? _designSystem.colors.pandra : _designSystem.colors.kala }) },
           date
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
           { style: { fontSize: 24, lineHeight: 4, textAlign: 'center', color: selected === date ? _designSystem.colors.pandra : _designSystem.colors.cold } },
           '.'
@@ -20304,99 +20324,101 @@ var Daterow = function Daterow(_ref) {
   );
 };
 
-
 var Calendar = function Calendar(_ref2) {
   var selected = _ref2.selected,
       children = _ref2.children;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     null,
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Large'], { textAlign: 'center', marginTop: 8 }) },
+      { style: _extends({}, _designSystem.fonts['Large'], { textAlign: 'center', marginTop: 8 }) },
       'October 2017'
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { paddingBottom: 8, paddingTop: 16, flexDirection: 'row', marginLeft: 16, marginRight: 16 } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Sun'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.cold }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.cold }) },
           'Mon'
         ),
-        _react2['default'].createElement(_reactSketchapp.View, { style: { backgroundColor: _designSystem.colors.cold, paddingBottom: 2, borderRadius: '50%' } })
+        _react2.default.createElement(_reactSketchapp.View, { style: { backgroundColor: _designSystem.colors.cold, paddingBottom: 2, borderRadius: '50%' } })
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Tue'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Wen'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Thu'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Fri'
         )
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flex: 1 } },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           _reactSketchapp.Text,
-          { style: Object.assign({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
+          { style: _extends({}, _designSystem.fonts['Small'], { textAlign: 'center', color: _designSystem.colors.savla }) },
           'Sat'
         )
       )
     ),
-    _react2['default'].createElement(Daterow, { dates: ['1', '2', '3', '4', '5', '6', '7'], selected: selected, current: ['2', '3', '5'] }),
-    _react2['default'].createElement(Daterow, { dates: ['8', '9', '10', '11', '12', '13', '14'], selected: selected, current: ['9', '11', '13'] }),
-    _react2['default'].createElement(Daterow, { dates: ['15', '16', '17', '18', '19', '20', '21'], selected: selected, current: ['16', '17', '18', '20'] }),
-    _react2['default'].createElement(Daterow, { dates: ['22', '23', '24', '25', '26', '27', '28'], selected: selected, current: [] }),
-    _react2['default'].createElement(Daterow, { dates: ['29', '30', '31', ' ', ' ', ' ', ' '], selected: selected, current: [] })
+    _react2.default.createElement(Daterow, { dates: ['1', '2', '3', '4', '5', '6', '7'], selected: selected, current: ['2', '3', '5'] }),
+    _react2.default.createElement(Daterow, { dates: ['8', '9', '10', '11', '12', '13', '14'], selected: selected, current: ['9', '11', '13'] }),
+    _react2.default.createElement(Daterow, { dates: ['15', '16', '17', '18', '19', '20', '21'], selected: selected, current: ['16', '17', '18', '20'] }),
+    _react2.default.createElement(Daterow, { dates: ['22', '23', '24', '25', '26', '27', '28'], selected: selected, current: [] }),
+    _react2.default.createElement(Daterow, { dates: ['29', '30', '31', ' ', ' ', ' ', ' '], selected: selected, current: [] })
   );
 };
 
-exports['default'] = Calendar;
+exports.default = Calendar;
 
 /***/ }),
-/* 161 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -20408,16 +20430,61 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Row = function Row(_ref) {
+  var children = _ref.children,
+      margin = _ref.margin,
+      first = _ref.first,
+      last = _ref.last;
+  return _react2.default.createElement(
+    _reactSketchapp.View,
+    { style: {
+        flexDirection: 'column',
+        backgroundColor: _designSystem.colors.pandra,
+        marginLeft: margin ? margin : 16,
+        marginRight: margin ? margin : 16,
+        marginTop: first ? 44 : 12,
+        marginBottom: last ? 44 : 12,
+        borderColor: _designSystem.colors.goora,
+        borderWidth: 1
+      } },
+    children
+  );
+};
+exports.default = Row;
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactSketchapp = __webpack_require__(2);
+
+var _designSystem = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ActivityRow = function ActivityRow(_ref) {
   var margin = _ref.margin,
       type = _ref.type,
       towns = _ref.towns,
       members = _ref.members;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: {
         flexDirection: 'row',
@@ -20427,40 +20494,40 @@ var ActivityRow = function ActivityRow(_ref) {
         marginTop: 32,
         marginBottom: 32
       } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 2 } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Title']) },
+        { style: _extends({}, _designSystem.fonts['Title']) },
         type
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Small']) },
+        { style: _extends({}, _designSystem.fonts['Small']) },
         towns.map(function (town, index) {
-          return towns.length - 1 === index ? town : String(town) + ', ';
+          return towns.length - 1 === index ? town : town + ', ';
         })
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 1, flexDirection: 'column', marginLeft: 8, justifyContent: 'center' } },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.Text,
-        { style: Object.assign({}, _designSystem.fonts['Micro'], { color: _designSystem.colors.savla }) },
+        { style: _extends({}, _designSystem.fonts['Micro'], { color: _designSystem.colors.savla }) },
         'Members'
       ),
-      _react2['default'].createElement(
+      _react2.default.createElement(
         _reactSketchapp.View,
         { style: { flexDirection: 'row' } },
         members.map(function (member) {
-          return _react2['default'].createElement(
+          return _react2.default.createElement(
             _reactSketchapp.View,
             { style: { flex: 1 } },
-            _react2['default'].createElement(
+            _react2.default.createElement(
               _reactSketchapp.Text,
-              { style: Object.assign({}, _designSystem.fonts['Small'], { color: _designSystem.colors.pandra, backgroundColor: _designSystem.colors.hirva, margin: 1, textAlign: 'center' }) },
+              { style: _extends({}, _designSystem.fonts['Small'], { color: _designSystem.colors.pandra, backgroundColor: _designSystem.colors.hirva, margin: 1, textAlign: 'center' }) },
               member
             )
           );
@@ -20469,15 +20536,21 @@ var ActivityRow = function ActivityRow(_ref) {
     )
   );
 };
-exports['default'] = ActivityRow;
+
+exports.default = ActivityRow;
 
 /***/ }),
-/* 162 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -20485,21 +20558,78 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Dot = function Dot(_ref) {
   var style = _ref.style,
       size = _ref.size,
       selected = _ref.selected;
-  return _react2['default'].createElement(_reactSketchapp.View, { style: Object.assign({ width: size, height: size, borderRadius: size / 2, backgroundColor: selected ? _designSystem.colors.pandra : _designSystem.colors.goora, borderColor: _designSystem.colors.pandra, borderWidth: 2 }, style) });
+  return _react2.default.createElement(_reactSketchapp.View, { style: _extends({ width: size, height: size, borderRadius: size / 2, backgroundColor: selected ? _designSystem.colors.pandra : _designSystem.colors.goora, borderColor: _designSystem.colors.pandra, borderWidth: 2 }, style) });
 };
-exports['default'] = Dot;
+
+exports.default = Dot;
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactSketchapp = __webpack_require__(2);
+
+var _designSystem = __webpack_require__(4);
+
+var _textBox = __webpack_require__(42);
+
+var _textBox2 = _interopRequireDefault(_textBox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SearchNav = function SearchNav(_ref) {
+  var title = _ref.title,
+      button = _ref.button,
+      focus = _ref.focus;
+  return _react2.default.createElement(
+    _reactSketchapp.View,
+    { style: { flexDirection: 'row', backgroundColor: _designSystem.colors.pandra, paddingTop: 4, paddingBottom: 4, borderColor: focus ? _designSystem.colors.kala : _designSystem.colors.goora, borderBottomWidth: 2 } },
+    _react2.default.createElement(
+      _reactSketchapp.View,
+      { style: { flex: 1 } },
+      _react2.default.createElement(_textBox2.default, { value: '', placeholder: 'Search', icon: true, margin: 16 })
+    ),
+    button ? _react2.default.createElement(
+      _reactSketchapp.Text,
+      { style: _extends({}, _designSystem.fonts['Small'], {
+          marginRight: 16,
+          marginTop: 32,
+          color: _designSystem.colors['hirva']
+        }) },
+      button
+    ) : null
+  );
+};
+
+exports.default = SearchNav;
 
 /***/ }),
 /* 163 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -20511,7 +20641,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
 var _designSystem2 = _interopRequireDefault(_designSystem);
 
@@ -20527,7 +20657,7 @@ var _Section = __webpack_require__(39);
 
 var _Section2 = _interopRequireDefault(_Section);
 
-var _Agenda = __webpack_require__(83);
+var _Agenda = __webpack_require__(81);
 
 var _Agenda2 = _interopRequireDefault(_Agenda);
 
@@ -20535,7 +20665,7 @@ var _PageNav = __webpack_require__(40);
 
 var _PageNav2 = _interopRequireDefault(_PageNav);
 
-var _BackNav = __webpack_require__(78);
+var _BackNav = __webpack_require__(77);
 
 var _BackNav2 = _interopRequireDefault(_BackNav);
 
@@ -20551,15 +20681,15 @@ var _twoRow = __webpack_require__(165);
 
 var _twoRow2 = _interopRequireDefault(_twoRow);
 
-var _dateRow = __webpack_require__(84);
+var _dateRow = __webpack_require__(82);
 
 var _dateRow2 = _interopRequireDefault(_dateRow);
 
-var _ldRow = __webpack_require__(77);
+var _ldRow = __webpack_require__(76);
 
 var _ldRow2 = _interopRequireDefault(_ldRow);
 
-var _rdRow = __webpack_require__(81);
+var _rdRow = __webpack_require__(80);
 
 var _rdRow2 = _interopRequireDefault(_rdRow);
 
@@ -20571,11 +20701,11 @@ var _textBox = __webpack_require__(42);
 
 var _textBox2 = _interopRequireDefault(_textBox);
 
-var _basicButton = __webpack_require__(80);
+var _basicButton = __webpack_require__(79);
 
 var _basicButton2 = _interopRequireDefault(_basicButton);
 
-var _bottomButton = __webpack_require__(79);
+var _bottomButton = __webpack_require__(78);
 
 var _bottomButton2 = _interopRequireDefault(_bottomButton);
 
@@ -20583,174 +20713,174 @@ var _resultRow = __webpack_require__(43);
 
 var _resultRow2 = _interopRequireDefault(_resultRow);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
 var Document = function Document(_ref) {
   var system = _ref.system;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     null,
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { name: 'Intro', style: { width: 420, marginBottom: system.spacing * 4 } },
-      _react2['default'].createElement(
-        _Label2['default'],
+      _react2.default.createElement(
+        _Label2.default,
         null,
         'KMW design for Enquiry Management Screens.'
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Dashboard Screen with Tabs' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_PageNav2['default'], { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_PageNav2.default, { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_saRow2['default'], { title: 'Current Editing' }),
-          _react2['default'].createElement(_twoRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry', bcolor: _designSystem.colors.goora }),
-          _react2['default'].createElement(_saRow2['default'], { title: 'Past Enquiries' }),
-          _react2['default'].createElement(_twoRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' }),
-          _react2['default'].createElement(_twoRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+          _react2.default.createElement(_saRow2.default, { title: 'Current Editing' }),
+          _react2.default.createElement(_twoRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry', bcolor: _designSystem.colors.goora }),
+          _react2.default.createElement(_saRow2.default, { title: 'Past Enquiries' }),
+          _react2.default.createElement(_twoRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' }),
+          _react2.default.createElement(_twoRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
         ),
-        _react2['default'].createElement(_BottomTabNav2['default'], null)
+        _react2.default.createElement(_BottomTabNav2.default, null)
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Dashboard Screen with Tabs' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_PageNav2['default'], { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' }),
-        _react2['default'].createElement(_Agenda2['default'], null),
-        _react2['default'].createElement(
+        _react2.default.createElement(_PageNav2.default, { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' }),
+        _react2.default.createElement(_Agenda2.default, null),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(
-            _dateRow2['default'],
+          _react2.default.createElement(
+            _dateRow2.default,
             { date: '23', day: 'Mon' },
-            _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+            _react2.default.createElement(_resultRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
           ),
-          _react2['default'].createElement(
-            _dateRow2['default'],
+          _react2.default.createElement(
+            _dateRow2.default,
             null,
-            _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+            _react2.default.createElement(_resultRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
           ),
-          _react2['default'].createElement(
-            _dateRow2['default'],
+          _react2.default.createElement(
+            _dateRow2.default,
             { date: '24', day: 'Tue' },
-            _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+            _react2.default.createElement(_resultRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
           )
         ),
-        _react2['default'].createElement(_BottomTabNav2['default'], { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' })
+        _react2.default.createElement(_BottomTabNav2.default, { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' })
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'New Enquiry' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_BackNav2['default'], { title: 'New Enquiry', button: 'RESET' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_BackNav2.default, { title: 'New Enquiry', button: 'RESET' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_ldRow2['default'], { title: 'Basic Customer Details' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Full Name', first: true, focus: true, value: 'some |' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Phone Number', last: true, value: '', placeholder: '+91 __________' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Address', value: '', placeholder: 'S/O' }),
-          _react2['default'].createElement(_textBox2['default'], { value: '', placeholder: 'Block' })
+          _react2.default.createElement(_ldRow2.default, { title: 'Basic Customer Details' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Full Name', first: true, focus: true, value: 'some |' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Phone Number', last: true, value: '', placeholder: '+91 __________' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Address', value: '', placeholder: 'S/O' }),
+          _react2.default.createElement(_textBox2.default, { value: '', placeholder: 'Block' })
         ),
-        _react2['default'].createElement(_bottomButton2['default'], null)
+        _react2.default.createElement(_bottomButton2.default, null)
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { marginBottom: 2800 } },
-      _react2['default'].createElement(
-        _Section2['default'],
+      _react2.default.createElement(
+        _Section2.default,
         { title: 'New Enquiry Complete' },
-        _react2['default'].createElement(
-          _Devices2['default'],
+        _react2.default.createElement(
+          _Devices2.default,
           { overflow: true },
-          _react2['default'].createElement(_BackNav2['default'], { title: 'New Enquiry', button: 'RESET' }),
-          _react2['default'].createElement(_ldRow2['default'], { title: 'Basic Customer Details' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Full Name', first: true, focus: true, value: 'some |' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Phone Number', last: true, value: '', placeholder: '+91 __________' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Address', value: '', placeholder: 'S/O' }),
-          _react2['default'].createElement(_textBox2['default'], { value: '', placeholder: 'Block' }),
-          _react2['default'].createElement(_textBox2['default'], { value: '', placeholder: 'Tehsil' }),
-          _react2['default'].createElement(_textBox2['default'], { value: '', placeholder: 'District' }),
-          _react2['default'].createElement(_textBox2['default'], { last: true, value: '', placeholder: 'State' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Land owned', value: '', placeholder: 'Irrigated Land (in acres)' }),
-          _react2['default'].createElement(_textBox2['default'], { last: true, value: '', placeholder: 'Non-Irrigated Land (in acres)' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Crops grown', value: '', placeholder: 'Add crop 1' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' }),
-          _react2['default'].createElement(_ldRow2['default'], { title: 'Interest Details' }),
-          _react2['default'].createElement(_textBox2['default'], { first: true, label: 'Customer interest', value: '', placeholder: 'Model 1' }),
-          _react2['default'].createElement(_basicButton2['default'], { title: '+ Add' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Estimate Date of Purchase', value: ' ', placeholder: '', focus: true }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Source of Enquiry', value: ' ', placeholder: '' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Referred by', value: ' ', placeholder: '' }),
-          _react2['default'].createElement(_textBox2['default'], { label: 'Influencer Name', value: ' ', placeholder: '' }),
-          _react2['default'].createElement(_ldRow2['default'], { title: 'Review' }),
-          _react2['default'].createElement(_rdRow2['default'], { title: 'Basic Details', button: 'CHANGE' }),
-          _react2['default'].createElement(_infoRow2['default'], { first: true, label: 'Name', value: 'John Doe' }),
-          _react2['default'].createElement(_infoRow2['default'], { label: 'Phone Number', value: '+91 9999999999' }),
-          _react2['default'].createElement(_infoRow2['default'], { last: true, label: 'Address', value: 'S/O 61/6A, Block 13A, Tehsil Haveli, District Pune, State Maharastra' }),
-          _react2['default'].createElement(_rdRow2['default'], { title: 'Interest Details', button: 'CHANGE' }),
-          _react2['default'].createElement(_infoRow2['default'], { first: true, label: 'Product', value: 'Model 1' }),
-          _react2['default'].createElement(_infoRow2['default'], { label: 'ESTIMATE DATE OF ENQUIRY', value: '12/12/2017' }),
-          _react2['default'].createElement(_infoRow2['default'], { label: 'Source of Enquiry', value: 'Activity 20/10/2017' }),
-          _react2['default'].createElement(_infoRow2['default'], { label: 'Referred by', value: 'Mr. Praful' }),
-          _react2['default'].createElement(_infoRow2['default'], { last: true, label: 'Influencer Name', value: 'Mr. Praful' }),
-          _react2['default'].createElement(_bottomButton2['default'], { label: 'SAVE' })
+          _react2.default.createElement(_BackNav2.default, { title: 'New Enquiry', button: 'RESET' }),
+          _react2.default.createElement(_ldRow2.default, { title: 'Basic Customer Details' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Full Name', first: true, focus: true, value: 'some |' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Phone Number', last: true, value: '', placeholder: '+91 __________' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Address', value: '', placeholder: 'S/O' }),
+          _react2.default.createElement(_textBox2.default, { value: '', placeholder: 'Block' }),
+          _react2.default.createElement(_textBox2.default, { value: '', placeholder: 'Tehsil' }),
+          _react2.default.createElement(_textBox2.default, { value: '', placeholder: 'District' }),
+          _react2.default.createElement(_textBox2.default, { last: true, value: '', placeholder: 'State' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Land owned', value: '', placeholder: 'Irrigated Land (in acres)' }),
+          _react2.default.createElement(_textBox2.default, { last: true, value: '', placeholder: 'Non-Irrigated Land (in acres)' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Crops grown', value: '', placeholder: 'Add crop 1' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' }),
+          _react2.default.createElement(_ldRow2.default, { title: 'Interest Details' }),
+          _react2.default.createElement(_textBox2.default, { first: true, label: 'Customer interest', value: '', placeholder: 'Model 1' }),
+          _react2.default.createElement(_basicButton2.default, { title: '+ Add' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Estimate Date of Purchase', value: ' ', placeholder: '', focus: true }),
+          _react2.default.createElement(_textBox2.default, { label: 'Source of Enquiry', value: ' ', placeholder: '' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Referred by', value: ' ', placeholder: '' }),
+          _react2.default.createElement(_textBox2.default, { label: 'Influencer Name', value: ' ', placeholder: '' }),
+          _react2.default.createElement(_ldRow2.default, { title: 'Review' }),
+          _react2.default.createElement(_rdRow2.default, { title: 'Basic Details', button: 'CHANGE' }),
+          _react2.default.createElement(_infoRow2.default, { first: true, label: 'Name', value: 'John Doe' }),
+          _react2.default.createElement(_infoRow2.default, { label: 'Phone Number', value: '+91 9999999999' }),
+          _react2.default.createElement(_infoRow2.default, { last: true, label: 'Address', value: 'S/O 61/6A, Block 13A, Tehsil Haveli, District Pune, State Maharastra' }),
+          _react2.default.createElement(_rdRow2.default, { title: 'Interest Details', button: 'CHANGE' }),
+          _react2.default.createElement(_infoRow2.default, { first: true, label: 'Product', value: 'Model 1' }),
+          _react2.default.createElement(_infoRow2.default, { label: 'ESTIMATE DATE OF ENQUIRY', value: '12/12/2017' }),
+          _react2.default.createElement(_infoRow2.default, { label: 'Source of Enquiry', value: 'Activity 20/10/2017' }),
+          _react2.default.createElement(_infoRow2.default, { label: 'Referred by', value: 'Mr. Praful' }),
+          _react2.default.createElement(_infoRow2.default, { last: true, label: 'Influencer Name', value: 'Mr. Praful' }),
+          _react2.default.createElement(_bottomButton2.default, { label: 'SAVE' })
         )
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'New Enquiry Review' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_BackNav2['default'], { title: 'New Enquiry' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_BackNav2.default, { title: 'New Enquiry' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_ldRow2['default'], { title: 'Review' }),
-          _react2['default'].createElement(_rdRow2['default'], { title: 'Basic Details', button: 'CHANGE' }),
-          _react2['default'].createElement(_infoRow2['default'], { first: true, label: 'Name', value: 'John Doe' }),
-          _react2['default'].createElement(_infoRow2['default'], { label: 'Phone Number', value: '+91 9999999999' }),
-          _react2['default'].createElement(_infoRow2['default'], { last: true, label: 'Address', value: 'S/O 61/6A, Block 13A, Tehsil Haveli, District Pune, State Maharastra' })
+          _react2.default.createElement(_ldRow2.default, { title: 'Review' }),
+          _react2.default.createElement(_rdRow2.default, { title: 'Basic Details', button: 'CHANGE' }),
+          _react2.default.createElement(_infoRow2.default, { first: true, label: 'Name', value: 'John Doe' }),
+          _react2.default.createElement(_infoRow2.default, { label: 'Phone Number', value: '+91 9999999999' }),
+          _react2.default.createElement(_infoRow2.default, { last: true, label: 'Address', value: 'S/O 61/6A, Block 13A, Tehsil Haveli, District Pune, State Maharastra' })
         ),
-        _react2['default'].createElement(_bottomButton2['default'], { label: 'SAVE' })
+        _react2.default.createElement(_bottomButton2.default, { label: 'SAVE' })
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Customer Enquiry Details Page' },
-      _react2['default'].createElement(
-        _Devices2['default'],
+      _react2.default.createElement(
+        _Devices2.default,
         null,
-        _react2['default'].createElement(_BackNav2['default'], { title: 'John Doe' }),
-        _react2['default'].createElement(
+        _react2.default.createElement(_BackNav2.default, { title: 'John Doe' }),
+        _react2.default.createElement(
           _reactSketchapp.View,
           { style: { flex: 1 } },
-          _react2['default'].createElement(_rdRow2['default'], { title: 'Basic Details', button: 'EDIT' }),
-          _react2['default'].createElement(_infoRow2['default'], { first: true, label: 'Name', value: 'John Doe' }),
-          _react2['default'].createElement(_infoRow2['default'], { label: 'Phone Number', value: '+91 9999999999' }),
-          _react2['default'].createElement(_infoRow2['default'], { last: true, label: 'Address', value: 'S/O 61/6A, Block 13A, Tehsil Haveli, District Pune, State Maharastra' }),
-          _react2['default'].createElement(_ldRow2['default'], { title: 'Enquiries' }),
-          _react2['default'].createElement(
-            _dateRow2['default'],
+          _react2.default.createElement(_rdRow2.default, { title: 'Basic Details', button: 'EDIT' }),
+          _react2.default.createElement(_infoRow2.default, { first: true, label: 'Name', value: 'John Doe' }),
+          _react2.default.createElement(_infoRow2.default, { label: 'Phone Number', value: '+91 9999999999' }),
+          _react2.default.createElement(_infoRow2.default, { last: true, label: 'Address', value: 'S/O 61/6A, Block 13A, Tehsil Haveli, District Pune, State Maharastra' }),
+          _react2.default.createElement(_ldRow2.default, { title: 'Enquiries' }),
+          _react2.default.createElement(
+            _dateRow2.default,
             { date: '23', day: 'Mon' },
-            _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+            _react2.default.createElement(_resultRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
           )
         )
       )
@@ -20758,7 +20888,7 @@ var Document = function Document(_ref) {
   );
 };
 
-exports['default'] = Document;
+exports.default = Document;
 
 // <View style={{ marginBottom: 900}}>
 // <Section title="Dashboard Screen without Tabs" style={{ marginBottom: 500}}>
@@ -20782,9 +20912,14 @@ exports['default'] = Document;
 /* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -20792,18 +20927,18 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SaRow = function SaRow(_ref) {
   var title = _ref.title;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'row' } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Title 4'], {
+      { style: _extends({}, _designSystem.fonts['Title 4'], {
           flex: 1,
           marginTop: 44,
           paddingBottom: 42,
@@ -20813,18 +20948,24 @@ var SaRow = function SaRow(_ref) {
         }) },
       title
     ),
-    _react2['default'].createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginRight: 16, marginTop: 46 } })
+    _react2.default.createElement(_reactSketchapp.View, { style: { width: 24, borderWidth: 1, borderColor: _designSystem.colors.cold, height: 24, marginRight: 16, marginTop: 46 } })
   );
 };
-exports['default'] = SaRow;
+
+exports.default = SaRow;
 
 /***/ }),
 /* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -20832,20 +20973,20 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TwoRow = function TwoRow(_ref) {
   var title = _ref.title,
       subtitle = _ref.subtitle,
       bcolor = _ref.bcolor;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'column', backgroundColor: _designSystem.colors.pandra } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Title 3'], {
+      { style: _extends({}, _designSystem.fonts['Title 3'], {
           flex: 1,
           marginTop: 44,
           marginLeft: 48,
@@ -20853,9 +20994,9 @@ var TwoRow = function TwoRow(_ref) {
         }) },
       title
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Large'], {
+      { style: _extends({}, _designSystem.fonts['Large'], {
           flex: 1,
           marginTop: 24,
           paddingBottom: 42,
@@ -20868,15 +21009,21 @@ var TwoRow = function TwoRow(_ref) {
     )
   );
 };
-exports['default'] = TwoRow;
+
+exports.default = TwoRow;
 
 /***/ }),
 /* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -20884,21 +21031,21 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var InfoRow = function InfoRow(_ref) {
   var label = _ref.label,
       value = _ref.value,
       first = _ref.first,
       last = _ref.last;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { style: { flexDirection: 'column', backgroundColor: _designSystem.colors.pandra } },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Regular'], {
+      { style: _extends({}, _designSystem.fonts['Regular'], {
           flex: 1,
           marginTop: first ? 44 : 12,
           marginLeft: 48,
@@ -20907,9 +21054,9 @@ var InfoRow = function InfoRow(_ref) {
         }) },
       label
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Large'], {
+      { style: _extends({}, _designSystem.fonts['Large'], {
           flex: 1,
           marginTop: 16,
           paddingBottom: last ? 42 : 12,
@@ -20923,11 +21070,15 @@ var InfoRow = function InfoRow(_ref) {
     )
   );
 };
-exports['default'] = InfoRow;
+
+exports.default = InfoRow;
 
 /***/ }),
 /* 167 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -20939,7 +21090,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
 var _designSystem2 = _interopRequireDefault(_designSystem);
 
@@ -20959,43 +21110,46 @@ var _TypeSpecimen = __webpack_require__(172);
 
 var _TypeSpecimen2 = _interopRequireDefault(_TypeSpecimen);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Document = function Document(_ref) {
   var system = _ref.system;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     null,
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.View,
       { name: 'Intro', style: { width: 420, marginBottom: system.spacing * 4 } },
-      _react2['default'].createElement(
-        _Label2['default'],
+      _react2.default.createElement(
+        _Label2.default,
         null,
         'KMW design document for design system.'
       )
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Type Styles' },
       Object.keys(system.fonts).map(function (name) {
-        return _react2['default'].createElement(_TypeSpecimen2['default'], { name: name, style: _reactSketchapp.TextStyles.get(name) });
+        return _react2.default.createElement(_TypeSpecimen2.default, { name: name, style: _reactSketchapp.TextStyles.get(name) });
       })
     ),
-    _react2['default'].createElement(
-      _Section2['default'],
+    _react2.default.createElement(
+      _Section2.default,
       { title: 'Color Palette' },
-      _react2['default'].createElement(_Palette2['default'], { colors: system.colors })
+      _react2.default.createElement(_Palette2.default, { colors: system.colors })
     )
   );
 };
 /* eslint-disable react/jsx-filename-extension, import/no-named-as-default-member */
 
-exports['default'] = Document;
+exports.default = Document;
 
 /***/ }),
 /* 168 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21011,13 +21165,13 @@ var _Swatch = __webpack_require__(169);
 
 var _Swatch2 = _interopRequireDefault(_Swatch);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SWATCH_WIDTH = 100;
 
 var Palette = function Palette(_ref) {
   var colors = _ref.colors;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     {
       style: {
@@ -21027,16 +21181,19 @@ var Palette = function Palette(_ref) {
       }
     },
     Object.keys(colors).map(function (name) {
-      return _react2['default'].createElement(_Swatch2['default'], { color: colors[name], name: name });
+      return _react2.default.createElement(_Swatch2.default, { color: colors[name], name: name });
     })
   );
 };
 
-exports['default'] = Palette;
+exports.default = Palette;
 
 /***/ }),
 /* 169 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21056,17 +21213,17 @@ var _Label = __webpack_require__(12);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SWATCH_WIDTH = 100;
 
 var Swatch = function Swatch(_ref) {
   var color = _ref.color,
       name = _ref.name;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     { name: name, style: { marginBottom: 48, marginRight: 48 } },
-    _react2['default'].createElement(_reactSketchapp.View, {
+    _react2.default.createElement(_reactSketchapp.View, {
       style: {
         width: SWATCH_WIDTH,
         height: SWATCH_WIDTH,
@@ -21075,25 +21232,28 @@ var Swatch = function Swatch(_ref) {
         marginBottom: 8
       }
     }),
-    _react2['default'].createElement(
-      _Label2['default'],
+    _react2.default.createElement(
+      _Label2.default,
       { bold: true },
       name
     ),
-    _react2['default'].createElement(
-      _Label2['default'],
+    _react2.default.createElement(
+      _Label2.default,
       null,
       color.hex
     ),
-    _react2['default'].createElement(_AccessibilityBadge2['default'], { level: color.accessibility })
+    _react2.default.createElement(_AccessibilityBadge2.default, { level: color.accessibility })
   );
 };
 
-exports['default'] = Swatch;
+exports.default = Swatch;
 
 /***/ }),
 /* 170 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21107,7 +21267,7 @@ var _Badge = __webpack_require__(171);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AccessibilityBadge = function AccessibilityBadge(_ref) {
   var level = _ref.level;
@@ -21126,18 +21286,21 @@ var AccessibilityBadge = function AccessibilityBadge(_ref) {
     default:
       text = null;
   }
-  return text && _react2['default'].createElement(
-    _Badge2['default'],
+  return text && _react2.default.createElement(
+    _Badge2.default,
     null,
     text
   );
 };
 
-exports['default'] = AccessibilityBadge;
+exports.default = AccessibilityBadge;
 
 /***/ }),
 /* 171 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21149,12 +21312,12 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Badge = function Badge(_ref) {
   var children = _ref.children,
       filled = _ref.filled;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
     {
       style: {
@@ -21166,7 +21329,7 @@ var Badge = function Badge(_ref) {
         borderColor: '#333'
       }
     },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
       {
         style: {
@@ -21178,15 +21341,20 @@ var Badge = function Badge(_ref) {
   );
 };
 
-exports['default'] = Badge;
+exports.default = Badge;
 
 /***/ }),
 /* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -21198,78 +21366,547 @@ var _Label = __webpack_require__(12);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TypeSpecimen = function TypeSpecimen(_ref) {
   var name = _ref.name,
       style = _ref.style;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
-    { name: 'TypeSpecimen-' + String(name), style: { flexDirection: 'row', marginBottom: 24 } },
-    _react2['default'].createElement(
+    { name: 'TypeSpecimen-' + name, style: { flexDirection: 'row', marginBottom: 24 } },
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { width: 100 } },
-      _react2['default'].createElement(
-        _Label2['default'],
+      _react2.default.createElement(
+        _Label2.default,
         null,
-        String(style.fontSize) + ' / ' + String(style.lineHeight)
+        style.fontSize + ' / ' + style.lineHeight
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       _reactSketchapp.Text,
       {
-        style: Object.assign({}, style)
+        style: _extends({}, style)
       },
       name
     )
   );
 };
-exports['default'] = TypeSpecimen;
+
+exports.default = TypeSpecimen;
 
 /***/ }),
 /* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+/* WEBPACK VAR INJECTION */(function(console) {
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _FiniteMachine = __webpack_require__(174);
+
+var _state = __webpack_require__(176);
+
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _Label = __webpack_require__(12);
 
-var _Timeline = __webpack_require__(174);
+var _Label2 = _interopRequireDefault(_Label);
+
+var _screen = __webpack_require__(179);
+
+var _screen2 = _interopRequireDefault(_screen);
+
+var _Timeline = __webpack_require__(178);
 
 var _Timeline2 = _interopRequireDefault(_Timeline);
 
-var _Search_enquiry = __webpack_require__(175);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _Search_enquiry2 = _interopRequireDefault(_Search_enquiry);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-var height = 640;
-var width = 360;
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-exports['default'] = Screen = function Screen(props) {
-  return _react2['default'].createElement(
-    _reactSketchapp.View,
-    { style: { width: width, height: height, shadowOpacity: 25, backgroundColor: _designSystem.colors.pandra, flexDirection: 'column' } },
-    _react2['default'].createElement(_Search_enquiry2['default'], null)
-  );
+// console.log(enquiry_management);
+
+// defaultState
+var defaultState = {
+  data: null
 };
+
+// Reducer
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments[1];
+  var type = action.type,
+      data = action.data;
+
+
+  if (type === "green") {
+    console.log('YEAAAA');
+    return _extends({}, state, { data: true });
+  }
+
+  return state;
+};
+
+var Main = function (_Component) {
+  _inherits(Main, _Component);
+
+  function Main() {
+    _classCallCheck(this, Main);
+
+    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+  }
+
+  _createClass(Main, [{
+    key: 'render',
+    value: function render() {
+      var state = {
+        start: "",
+        moves: ["", "BOTTOM_TAB_ADD_CLICK", "SUCCESS", "CLOSE", "CALENDAR_EXPANDING_CLICK", "BOTTOM_TAB_FILTER_CLICK"]
+      };
+      return _react2.default.createElement(
+        _reactSketchapp.View,
+        { style: { flexDirection: 'row', marginBottom: 64 } },
+        state.moves.map(function (mv, index) {
+          return _react2.default.createElement(_FiniteMachine.FiniteMachine, {
+            log: true,
+            key: 'fs' + index,
+            chart: _state.enquiry_management,
+            reducer: reducer,
+            state: state,
+            current: index,
+            render: function render(machine) {
+              return _react2.default.createElement(
+                _screen2.default,
+                null,
+                _react2.default.createElement(
+                  _FiniteMachine.Switch,
+                  { machine: machine, current: index },
+                  _react2.default.createElement(_FiniteMachine.Match, {
+                    state: 'add_enquiry',
+                    render: function render(_ref) {
+                      var transition = _ref.transition;
+                      return _react2.default.createElement(
+                        _Label2.default,
+                        null,
+                        'Add Enquiry'
+                      );
+                    }
+                  }),
+                  _react2.default.createElement(_FiniteMachine.Match, {
+                    state: 'detail_enquiry',
+                    render: function render(_ref2) {
+                      var transition = _ref2.transition;
+                      return _react2.default.createElement(
+                        _Label2.default,
+                        null,
+                        'Detail Enquiry'
+                      );
+                    }
+                  }),
+                  _react2.default.createElement(_FiniteMachine.Match, {
+                    state: 'filter_enquiry',
+                    render: function render(_ref3) {
+                      var transition = _ref3.transition;
+                      return _react2.default.createElement(
+                        _Label2.default,
+                        null,
+                        'Filter Enquiry'
+                      );
+                    }
+                  }),
+                  _react2.default.createElement(_FiniteMachine.Match, {
+                    state: 'overview',
+                    render: function render(_ref4) {
+                      var transition = _ref4.transition;
+                      return _react2.default.createElement(_Timeline2.default, null);
+                    }
+                  }),
+                  _react2.default.createElement(_FiniteMachine.Match, {
+                    state: 'overview.timeline',
+                    render: function render(_ref5) {
+                      var transition = _ref5.transition;
+                      return _react2.default.createElement(
+                        _Label2.default,
+                        null,
+                        'Overview Timeline'
+                      );
+                    }
+                  }),
+                  _react2.default.createElement(_FiniteMachine.Match, {
+                    state: 'overview.calendar',
+                    render: function render(_ref6) {
+                      var transition = _ref6.transition;
+                      return _react2.default.createElement(
+                        _Label2.default,
+                        null,
+                        'Overview Calendar'
+                      );
+                    }
+                  }),
+                  _react2.default.createElement(_FiniteMachine.Match, {
+                    state: 'search_enquiry',
+                    render: function render(_ref7) {
+                      var transition = _ref7.transition;
+                      return _react2.default.createElement(
+                        _Label2.default,
+                        null,
+                        'Search Enquiry'
+                      );
+                    }
+                  })
+                )
+              );
+            } });
+        })
+      );
+    }
+  }]);
+
+  return Main;
+}(_react.Component);
+
+exports.default = Main;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
 /* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+/* WEBPACK VAR INJECTION */(function(console) {
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Switch = exports.Match = exports.FiniteMachine = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _xstate = __webpack_require__(175);
+
+var _propTypes = __webpack_require__(14);
+
+var PropTypes = _interopRequireWildcard(_propTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var FiniteMachine = function (_Component) {
+  _inherits(FiniteMachine, _Component);
+
+  function FiniteMachine() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, FiniteMachine);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = FiniteMachine.__proto__ || Object.getPrototypeOf(FiniteMachine)).call.apply(_ref, [this].concat(args))), _this), _this.machine = (0, _xstate.Machine)(_this.props.chart), _this.state = {
+      data: _this.props.reducer(undefined, { type: "@init" }),
+      machineState: _this.getMachineState()
+    }, _this.transition = function (actionType, newData) {
+      var _this$props = _this.props,
+          log = _this$props.log,
+          chart = _this$props.chart,
+          reducer = _this$props.reducer;
+      var _this$state = _this.state,
+          data = _this$state.data,
+          machineState = _this$state.machineState;
+
+
+      var nextState = _this.machine.transition(machineState, actionType).toString();
+
+      var action = {
+        data: newData,
+        nextState: nextState,
+        type: machineState + '.' + actionType
+      };
+
+      if (log) {
+        console.log(chart.id, action.type, action.data);
+      }
+
+      _this.setState({
+        data: reducer(data, action),
+        machineState: nextState
+      }, log ? function () {
+        console.log(chart.id, _this.state.machineState, _this.state.data);
+      } : undefined);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(FiniteMachine, [{
+    key: 'getMachineState',
+    value: function getMachineState() {
+      var _this2 = this;
+
+      // console.log(this.machine);
+      var _props = this.props,
+          state = _props.state,
+          current = _props.current;
+
+      var machineState = void 0;
+
+      if (state.start) {
+        machineState = this.machine.transition(state.start, "").toString();
+      } else {
+        machineState = this.machine.getInitialState();
+      }
+
+      // console.log(machineState);
+      state.moves.forEach(function (mv, index) {
+        if (index <= current && index > 0) {
+          machineState = _this2.machine.transition(machineState, mv);
+        }
+        machineState = machineState.toString();
+      });
+
+      return machineState;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return this.props.render({
+        state: this.state.machineState,
+        data: this.state.data,
+        transition: this.transition
+      });
+    }
+  }]);
+
+  return FiniteMachine;
+}(_react.Component);
+
+var Match = function (_Component2) {
+  _inherits(Match, _Component2);
+
+  function Match() {
+    _classCallCheck(this, Match);
+
+    return _possibleConstructorReturn(this, (Match.__proto__ || Object.getPrototypeOf(Match)).apply(this, arguments));
+  }
+
+  _createClass(Match, [{
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          Component = _props2.component,
+          render = _props2.render,
+          partial = _props2.partial,
+          conditional = _props2.conditional,
+          machine = _props2.machine,
+          state = _props2.state;
+
+
+      var match = partial ? machine.state.startsWith(state) : machine.state === state;
+
+      return conditional ? match ? render ? render(machine) : _react2.default.createElement(Component, machine) : null : render ? render(machine) : _react2.default.createElement(Component, machine);
+    }
+  }]);
+
+  return Match;
+}(_react.Component);
+
+Match.propTypes = {
+  machine: PropTypes.shape({
+    state: PropTypes.string,
+    transition: PropTypes.func
+  }),
+  state: PropTypes.string,
+  partial: PropTypes.bool,
+  conditional: PropTypes.bool
+};
+Match.defaultProps = {
+  partial: false,
+  conditional: true
+};
+
+var Switch = function (_Component3) {
+  _inherits(Switch, _Component3);
+
+  function Switch() {
+    _classCallCheck(this, Switch);
+
+    return _possibleConstructorReturn(this, (Switch.__proto__ || Object.getPrototypeOf(Switch)).apply(this, arguments));
+  }
+
+  _createClass(Switch, [{
+    key: 'render',
+    value: function render() {
+      var _props3 = this.props,
+          children = _props3.children,
+          machine = _props3.machine;
+
+
+      var match = null;
+
+      _react2.default.Children.forEach(children, function (child, index) {
+        if (match) return;
+        if (child.props.state === machine.state) {
+          match = child;
+        }
+      });
+
+      return _react2.default.cloneElement(match, { machine: machine });
+    }
+  }]);
+
+  return Switch;
+}(_react.Component);
+
+Switch.propTypes = {
+  machine: PropTypes.shape({
+    state: PropTypes.string.isRequired,
+    transition: PropTypes.func.isRequired
+  }).isRequired
+};
+exports.FiniteMachine = FiniteMachine;
+exports.Match = Match;
+exports.Switch = Switch;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,e){ true?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.xstate=e():t.xstate=e()}(this,function(){return function(t){function e(n){if(r[n])return r[n].exports;var i=r[n]={i:n,l:!1,exports:{}};return t[n].call(i.exports,i,i.exports,e),i.l=!0,i.exports}var r={};return e.m=t,e.c=r,e.d=function(t,r,n){e.o(t,r)||Object.defineProperty(t,r,{configurable:!1,enumerable:!0,get:n})},e.n=function(t){var r=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(r,"a",r),r},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=4)}([function(t,e,r){"use strict";function n(t,e,r,i){if(void 0===i&&(i=t.history),"string"==typeof e){var o=t.states[e],s=o.getInitialState();if(!s)return o.next(r,i)||void 0;d={},d[e]=s,e=d}if(t.parallel){var s=t.getInitialState();"string"!=typeof s&&(e=a({},s,e))}if(1===Object.keys(e).length){var u=Object.keys(e)[0],c=t.states[u],f=e[u],l=i[u],h=n(c,f,r,l);return h?(g={},g[u]=h,g):c.next(r,i)}var p={},y=!1,v={};return Object.keys(e).forEach(function(a){var o=n(t.states[a],e[a],r,i[a]);o?(p[a]=o,y=!0):(p[a]=void 0,v[a]=e[a])}),y?Object.assign(p,v):void 0;var d,g}function i(t){return new h(t)}var a=this&&this.__assign||Object.assign||function(t){for(var e,r=1,n=arguments.length;r<n;r++){e=arguments[r];for(var i in e)Object.prototype.hasOwnProperty.call(e,i)&&(t[i]=e[i])}return t};Object.defineProperty(e,"__esModule",{value:!0});var o=r(1),s=r(3),u=r(6),c=r(2),f=r(7),l=".",h=function(){function t(e,r){var n=this;this._relativeValue=new Map,this.key=e.key,this.parent=e.parent,this.id=this.parent?this.parent.id+l+this.key:this.key,this.initial=e.initial,this.parallel=!!e.parallel,this.history=r||f.createHistory(e),this.states=e.states?o.mapValues(e.states,function(e,i){return new t(a({},e,{key:i,parent:n}),r)}):{},this.on=e.on}return t.prototype.transition=function(t,e){var r=(t instanceof c.default?t.value:t)||this.getInitialState(),i=t instanceof c.default?t.history:this.history;r=o.toTrie(r);var a=n(this,r,e,i)||n(this,r,void 0,i);return new c.default({value:a,history:f.updateHistory(i,r),changed:!0})},t.prototype.next=function(t,e){if(!t)return this.key;var r=o.getActionType(t);if(this.on&&this.on[r]){var n=o.toStatePath(this.on[r]),i=this.parent,a=e;for(n.forEach(function(t){"$history"===t&&(t=a.$current),"object"==typeof t&&(t=Object.keys(t)[0]),i=i.states[t],a=a[t]});i.initial;)i=i.states[i.initial];return i.getRelativeValue(this.parent)}},t.prototype.getInitialState=function(){var t=this._initialState;return t||(t=this.parallel?o.mapValues(this.states,function(t){return t.getInitialState()}):this.initial,this._initialState=t)},t.prototype.getState=function(t){var e=o.toStatePath(t);try{return e.reduce(function(t,e){return t.states[e]},this)}catch(t){return}},Object.defineProperty(t.prototype,"events",{get:function(){var t=this;if(this._events)return this._events;var e=new Set(this.on?Object.keys(this.on):void 0);return Object.keys(this.states).forEach(function(r){var n=t.states[r];if(n.states)for(var i=0,a=n.events;i<a.length;i++){var o=a[i];e.add(o)}}),this._events=Array.from(e)},enumerable:!0,configurable:!0}),t.prototype.getRelativeValue=function(t){var e=this._relativeValue.get(t);if(e)return e;for(var r=this.getInitialState(),n=r?(s={},s[this.key]=r,s):this.key,i=this.parent;i&&i!==t;){var o=i.getInitialState();u={},u[i.key]="object"==typeof o&&"object"==typeof n?a({},o,n):n,n=u,i=i.parent}return this._relativeValue.set(t,n),n;var s,u},t}();e.StateNode=h,e.default={StateNode:h,Machine:i,State:c.default,matchesState:s.default,mapState:u.default}},function(t,e,r){"use strict";function n(t,e,r){if(t[e]===r)return t;var n=Object.assign({},t);return n[e]=r,n}function i(t,e){return e.reduce(function(t,e){return t[e]},t)}function a(t,e,r){var i=e[0];return 1===e.length?n(t,i,r):n(t,i,a(t[i]||{},e.slice(1),r))}function o(t,e){return t.reduce(function(t,r){var n=e(r);return Array.isArray(n)?t.push.apply(t,n):t.push(n),t},[])}function s(t){try{return"string"==typeof t||"number"==typeof t?""+t:t.type}catch(t){throw new Error("Actions must be strings or objects with a string action.type.")}}function u(t){try{return Array.isArray(t)?t:t.toString().split(".")}catch(e){throw new Error("'"+t+"' is not a valid state path.")}}function c(t){if("object"==typeof t&&!(t instanceof l.default))return t;var e=u(t);if(1===e.length)return e[0];for(var r={},n=r,i=0;i<e.length-1;i++)i===e.length-2?n[e[i]]=e[i+1]:(n[e[i]]={},n=n[e[i]]);return r}function f(t,e){var r={};return Object.keys(t).forEach(function(n){r[n]=e(t[n],n,t)}),r}Object.defineProperty(e,"__esModule",{value:!0});var l=r(2);e.get=i,e.assocIn=a,e.flatMap=o,e.getActionType=s,e.toStatePath=u,e.toTrie=c,e.mapValues=f},function(t,e,r){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var n=r(5),i=function(){function t(t){var e=t.value,r=t.history,n=t.changed;this.value=e,this.history=r,this.changed=n}return t.prototype.toString=function(){if("string"==typeof this.value)return this.value;for(var t=[],e=this.value;;){if("string"==typeof e){t.push(e);break}var r=Object.keys(e),i=r[0];if(r.slice(1).length)return;t.push(i),e=e[i]}return t.join(n.STATE_DELIMITER)},t}();e.default=i},function(t,e,r){"use strict";function n(t,e){var r=i.toTrie(t),a=i.toTrie(e);return"string"==typeof a?"string"==typeof r?a===r:a in r:"string"==typeof r?r in a:Object.keys(r).every(function(t){return t in a&&n(r[t],a[t])})}Object.defineProperty(e,"__esModule",{value:!0});var i=r(1);e.default=n},function(t,e,r){r(0),t.exports=r(0)},function(t,e,r){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.STATE_DELIMITER="."},function(t,e,r){"use strict";function n(t,e){var r;return Object.keys(t).forEach(function(t){i.default(t,e)&&(!r||e.length>r.length)&&(r=t)}),t[r]}Object.defineProperty(e,"__esModule",{value:!0});var i=r(3);e.default=n},function(t,e,r){"use strict";function n(t){if(t.states){var e={};return Object.keys(t.states).forEach(function(r){var i=t.states[r];i.states&&(e[r]=n(i))}),e.$current=t.initial,e}}function i(t,e){var r=a({},t,{$current:e});return"string"==typeof e?r:(Object.keys(e).forEach(function(n){var a=t[n],o=e[n];"string"!=typeof a&&(r[n]=i(a,o))}),r)}var a=this&&this.__assign||Object.assign||function(t){for(var e,r=1,n=arguments.length;r<n;r++){e=arguments[r];for(var i in e)Object.prototype.hasOwnProperty.call(e,i)&&(t[i]=e[i])}return t};Object.defineProperty(e,"__esModule",{value:!0}),e.createHistory=n,e.updateHistory=i}]).default});
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var enquiry_overview = exports.enquiry_overview = {
+  id: 'enquiry_overview',
+  initial: 'timeline',
+  states: {
+    timeline: {
+      on: {
+        CALENDAR_EXPANDING_CLICK: "calendar"
+      }
+    },
+    calendar: {
+      on: {
+        SELECT_DATE: "timeline"
+      }
+    }
+  }
+};
+
+var enquiry_management = exports.enquiry_management = {
+  id: 'enquiry_management',
+  initial: 'overview',
+  states: {
+    overview: _extends({
+      on: {
+        BOTTOM_TAB_SEARCH_CLICK: "search_enquiry",
+        BOTTOM_TAB_ADD_CLICK: "add_enquiry",
+        BOTTOM_TAB_FILTER_CLICK: "filter_enquiry",
+        ENQUIRY_CARD_CLICK: "detail_enquiry"
+      }
+    }, enquiry_overview),
+    search_enquiry: {
+      on: {
+        CANCEL_BUTTON_ENQUIRY_CLICK: "overview"
+      }
+    },
+    add_enquiry: {
+      on: {
+        CANCEL: "overview",
+        SUCCESS: "detail_enquiry"
+      }
+    },
+    detail_enquiry: {
+      on: {
+        CLOSE: "overview"
+      }
+    },
+    filter_enquiry: {
+      on: {
+        APPLY_FILTER_CLICK: "overview",
+        CANCEL: "overview"
+      }
+    }
+  }
+};
+
+var systems = exports.systems = {
+  id: 'sytems',
+  initial: 'enquiry_management',
+  states: {
+    enquiry_management: _extends({
+      on: {
+        HEADER_NOTIFICATION_ICON_CLICK: 'notification',
+        SIDE_MENU_ACTIVITY_CLICK: 'activity_management'
+      }
+    }, enquiry_management),
+    activity_management: {
+      on: {
+        HEADER_NOTIFICATION_ICON_CLICK: 'notification',
+        SIDE_MENU_ENQUIRY_CLICK: 'enquiry_management'
+      }
+    },
+    notification: {
+      on: {
+        SIDE_MENU_ACTIVITY_CLICK: 'activity_management',
+        SIDE_MENU_ENQUIRY_CLICK: 'enquiry_management'
+      }
+    }
+  }
+};
+
+/***/ }),
+/* 177 */,
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -21277,13 +21914,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-var _Agenda = __webpack_require__(83);
+var _Agenda = __webpack_require__(81);
 
 var _Agenda2 = _interopRequireDefault(_Agenda);
 
-var _dateRow = __webpack_require__(84);
+var _dateRow = __webpack_require__(82);
 
 var _dateRow2 = _interopRequireDefault(_dateRow);
 
@@ -21299,41 +21936,46 @@ var _BottomTabNav = __webpack_require__(41);
 
 var _BottomTabNav2 = _interopRequireDefault(_BottomTabNav);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports['default'] = Timeline = function Timeline(_ref) {
+var Timeline = function Timeline(_ref) {
   var styles = _ref.styles;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     _reactSketchapp.View,
-    { style: Object.assign({ flex: 1 }, styles) },
-    _react2['default'].createElement(_PageNav2['default'], { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' }),
-    _react2['default'].createElement(_Agenda2['default'], null),
-    _react2['default'].createElement(
+    { style: _extends({}, styles, { flex: 1, flexDirection: 'column' }) },
+    _react2.default.createElement(_PageNav2.default, { title: 'Enquiry Manager', leftIcon: 'down-arrow.svg' }),
+    _react2.default.createElement(_Agenda2.default, null),
+    _react2.default.createElement(
       _reactSketchapp.View,
       { style: { flex: 1 } },
-      _react2['default'].createElement(
-        _dateRow2['default'],
+      _react2.default.createElement(
+        _dateRow2.default,
         { date: '23', day: 'Mon' },
-        _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+        _react2.default.createElement(_resultRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
       ),
-      _react2['default'].createElement(
-        _dateRow2['default'],
+      _react2.default.createElement(
+        _dateRow2.default,
         null,
-        _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+        _react2.default.createElement(_resultRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
       ),
-      _react2['default'].createElement(
-        _dateRow2['default'],
-        { date: '24', day: 'Tue' },
-        _react2['default'].createElement(_resultRow2['default'], { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
+      _react2.default.createElement(
+        _dateRow2.default,
+        { first: true, last: true, date: '24', day: 'Tue' },
+        _react2.default.createElement(_resultRow2.default, { title: 'John Doe, Baramati', subtitle: 'Model X tractor, Hot Enquiry' })
       )
     ),
-    _react2['default'].createElement(_BottomTabNav2['default'], null)
+    _react2.default.createElement(_BottomTabNav2.default, null)
   );
 };
 
+exports.default = Timeline;
+
 /***/ }),
-/* 175 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21345,47 +21987,21 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactSketchapp = __webpack_require__(2);
 
-var _designSystem = __webpack_require__(3);
+var _designSystem = __webpack_require__(4);
 
-var _SearchNav = __webpack_require__(82);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _SearchNav2 = _interopRequireDefault(_SearchNav);
-
-var _Row = __webpack_require__(76);
-
-var _Row2 = _interopRequireDefault(_Row);
-
-var _resultRow = __webpack_require__(43);
-
-var _resultRow2 = _interopRequireDefault(_resultRow);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-exports['default'] = Search = function Search(props) {
-  return _react2['default'].createElement(
+var height = 640;
+var width = 360;
+var Screen = function Screen(props) {
+  return _react2.default.createElement(
     _reactSketchapp.View,
-    null,
-    _react2['default'].createElement(_SearchNav2['default'], { title: 'Campaign Van', button: 'Cancel' }),
-    _react2['default'].createElement(
-      _reactSketchapp.Text,
-      { style: Object.assign({}, _designSystem.fonts['Large'], { marginLeft: 16, marginRight: 16, marginTop: 32, marginBottom: 16, paddingLeft: 12, borderBottomWidth: 2, borderColor: _designSystem.colors.savla }) },
-      'Recent Searches'
-    ),
-    _react2['default'].createElement(
-      _Row2['default'],
-      null,
-      _react2['default'].createElement(_resultRow2['default'], {
-        title: 'Sharad P, Baramati',
-        subtitle: 'Model X tractor, Hot Enquiry',
-        status: ['HOT'] })
-    ),
-    _react2['default'].createElement(
-      _Row2['default'],
-      null,
-      _react2['default'].createElement(_resultRow2['default'], { title: 'Narendra M, Shikrapur', subtitle: 'Model X tractor, Hot Enquiry' })
-    )
+    { style: { width: props.width ? props.width : width, shadowOpacity: 25, backgroundColor: _designSystem.colors.pandra, flexDirection: 'column', marginRight: 48, overflow: 'hidden' } },
+    props.children
   );
 };
+
+exports.default = Screen;
 
 /***/ })
 /******/ ]);

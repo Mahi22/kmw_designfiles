@@ -9,9 +9,11 @@ type P = {
   date: string,
   day: string,
   children?: any,
+  first: boolean,
+  last: boolean,
 };
-const DateRow = ({ title, subtitle, date, day, children }: P) => (
-  <View style={{ flexDirection: 'row'}}>
+const DateRow = ({ title, subtitle, date, day, children, first, last }: P) => (
+  <View style={{ flexDirection: 'row', marginTop: first ? 16 : 2, marginBottom: last ? 16 : 2 }}>
     <View style={{flexDirection: 'column', width: 24, marginLeft: 12, marginRight: 10 }}>
       <Text style={{ ...fonts['Large'], color: colors.savla, textAlign: 'center' }}>
         {date}

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Machine } from 'xstate';
 import * as PropTypes from 'prop-types';
 
+
 class FiniteMachine extends Component {
-  machine = Machine(this.props.chart)
+  machine = Machine(this.props.chart);
 
   state = {
     data: this.props.reducer(undefined, { type: "@init" }),
@@ -12,13 +13,25 @@ class FiniteMachine extends Component {
 
   getMachineState() {
     // console.log(this.machine);
-    const { startstate, moves } = this.props;
-    if (startstate) {
-      console.log("Do here");
-    }
-    let state = this.machine.getInitialState();
+    const { state, current } = this.props;
+    let machineState;
 
-    return state;
+    if (state.start) {
+      machineState = this.machine.transition(state.start, "").toString();
+    } else {
+      machineState = this.machine.getInitialState();
+    }
+
+    // console.log(machineState);
+    state.moves.forEach((mv, index) => {
+      if (index <= current && index > 0) {
+        machineState = this.machine.transition(machineState, mv);
+      }
+      machineState = machineState.toString();
+    });
+
+
+    return machineState;
   }
 
   transition = (actionType, newData) => {

@@ -7,7 +7,9 @@ import designSystem from './designSystem';
 import Activity from './activity';
 import Enquiry from './enquiry';
 import Styleguide from './styleguide';
-import Screen from './screen';
+// import Screen from './screen';
+
+import Main from './fsa/main';
 
 export default () => {
   TextStyles.create(
@@ -18,5 +20,5 @@ export default () => {
     designSystem.fonts
   );
 
-  render(<Screen system={designSystem} />, context.document.currentPage());
+  render(<Main system={designSystem} />, context.document.currentPage());
 };

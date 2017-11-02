@@ -9,8 +9,12 @@ import ResultRow from '../../components/enquiry/resultRow';
 import PageNav from '../../components/navigation/PageNav';
 import BottomTabNav from '../../components/navigation/BottomTabNav';
 
-export default Timeline = ({ styles }) => (
-  <View style={{ flex: 1, ...styles }}>
+type P = {
+  styles?: any,
+};
+
+const Timeline = ({ styles }: P) => (
+  <View style={{ ...styles, flex: 1, flexDirection: 'column'}}>
     <PageNav title="Enquiry Manager" leftIcon="down-arrow.svg" />
     <Agenda />
     <View style={{flex: 1}}>
@@ -20,10 +24,12 @@ export default Timeline = ({ styles }) => (
       <DateRow>
         <ResultRow title="John Doe, Baramati" subtitle="Model X tractor, Hot Enquiry" />
       </DateRow>
-      <DateRow date="24" day="Tue">
+      <DateRow first last date="24" day="Tue">
         <ResultRow title="John Doe, Baramati" subtitle="Model X tractor, Hot Enquiry" />
       </DateRow>
     </View>
     <BottomTabNav />
   </View>
 );
+
+export default Timeline;
