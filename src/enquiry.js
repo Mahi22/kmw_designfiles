@@ -23,6 +23,7 @@ import TextBox from './components/forms/textBox';
 import BasicButton from './components/forms/basicButton';
 import BottomButton from './components/forms/bottomButton';
 import ResultRow from './components/enquiry/resultRow';
+import Dot from './components/Dot';
 
 const Document = ({ system }: { system: DesignSystem }) => (
   <View>
@@ -141,7 +142,10 @@ const Document = ({ system }: { system: DesignSystem }) => (
       <Devices>
         <BackNav title="John Doe" />
         <View style={{flex: 1}}>
-          <RdRow title="Basic Details" button="EDIT" />
+          <View style={{ flexDirection: 'row', justifyContent: 'center', paddingTop: 12, paddingBottom: 12  }}>
+            <Dot size={24} style={{ marginRight: 12 }} selected />
+            <Dot size={24} />
+          </View>
           <InfoRow first label="Name" value="John Doe" />
           <InfoRow label="Phone Number" value="+91 9999999999" />
           <InfoRow last label="Address" value="S/O 61/6A, Block 13A, Tehsil Haveli, District Pune, State Maharastra" />

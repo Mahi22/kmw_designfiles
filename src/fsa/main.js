@@ -6,7 +6,7 @@ import { enquiry_management } from './state';
 import { View } from 'react-sketchapp';
 import Label from '../components/Label';
 
-import Screen from '../screen';
+import Screen from './screen';
 
 import Timeline from '../interfaces/enquiry/Timeline';
 
