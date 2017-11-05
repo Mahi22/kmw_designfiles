@@ -5,17 +5,18 @@ import { colors, fonts } from '../../designSystem';
 
 type P = {
   title: string,
+  style?: any
 };
-const BasicButton = ({ title }: P) => (
+const BasicButton = ({ title, style = {} }: P) => (
   <View style={{ flexDirection: 'row', backgroundColor: colors.pandra }}>
     <Text style={{
       ...fonts['Small'],
       marginTop: 12,
-      marginLeft: 48,
       marginBottom: 44,
-      borderBottomWidth: 2,
+      // borderBottomWidth: 2,
       borderColor: colors.cold,
-      color: colors.cold
+      color: colors.cold,
+      ...style
     }} >
       {title}
     </Text>

@@ -9,7 +9,7 @@ type P = {
 const FlRow = ({ title }: P) => (
   <View style={{ flexDirection: 'row' }}>
     <Text style={{
-      ...fonts['Title 4'],
+      ...fonts['Large'],
       flex: 1,
       marginTop: 24,
       paddingBottom: 22,

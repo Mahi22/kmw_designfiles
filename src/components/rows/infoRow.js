@@ -7,16 +7,16 @@ type P = {
   label: string,
   value: string,
   first: boolean,
-  last: boolean
+  last: boolean,
+  margin: number
 };
-const InfoRow = ({ label, value, first, last }: P) => (
+const InfoRow = ({ label, value, first, last, margin }: P) => (
   <View style={{ flexDirection: 'column', backgroundColor: colors.pandra }}>
     <Text style={{
       ...fonts['Regular'],
       flex: 1,
       marginTop: first ? 44 : 12,
-      marginLeft: 48,
-      marginRight: 48,
+      marginLeft: margin ? margin : 0 ,
       color: colors.savla
     }} >
       {label}
@@ -26,7 +26,7 @@ const InfoRow = ({ label, value, first, last }: P) => (
       flex: 1,
       marginTop: 16,
       paddingBottom: last ? 42 : 12,
-      marginLeft: 48,
+      marginLeft: margin ? margin : 0,
       marginRight: 48,
       borderBottomWidth: last ? 2 : 0,
       borderColor: colors.goora,

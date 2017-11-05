@@ -12,17 +12,18 @@ type P = {
   focus: boolean,
   error: boolean,
   icon: boolean,
-  margin?: number
+  margin?: number,
+  overflow: boolean
 };
-const TextBox= ({ label, value, first, last, placeholder, focus, error, icon, margin }: P) => (
-  <View style={{ flexDirection: 'column', backgroundColor: colors.pandra }}>
+const TextBox= ({ label, value, first, last, placeholder, focus, error, icon, margin, overflow }: P) => (
+  <View style={{ flexDirection: 'column', backgroundColor: colors.pandra, opacity: value === ' ' ? 0.5 : 1 }}>
     {
       label ?
       <Text style={{
         ...fonts['Large'],
         flex: 1,
         marginTop: first ? 44 : 12,
-        marginLeft: 48,
+        // marginLeft: 48,
         marginRight: 48,
         color: colors.savla
       }} >
@@ -38,12 +39,13 @@ const TextBox= ({ label, value, first, last, placeholder, focus, error, icon, ma
       paddingBottom: 12,
       paddingLeft: 12,
       paddingRight: 12,
-      marginLeft: margin ? margin : 48,
-      marginRight: margin ? margin : 48,
+      // marginLeft: margin ? margin : 48,
+      // marginRight: margin ? margin : 48,
       boxSizing: 'border-box',
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: focus ? colors.savla : error ? colors.hot : colors.goora
+      borderColor: focus ? colors.savla : error ? colors.hot : colors.goora,
+      overflow: 'hidden'
     }}>
       {
         icon ?
@@ -52,7 +54,7 @@ const TextBox= ({ label, value, first, last, placeholder, focus, error, icon, ma
       }
       <Text style={{
         ...fonts['Regular'],
-        color: value === '' ? colors.savla : error ? colors.hot : colors.kala
+        color: value === '' ? colors.savla : error ? colors.hot : colors.kala,
       }} >
         {value === '' ? placeholder : value}
       </Text>

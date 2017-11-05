@@ -5,30 +5,26 @@ import { colors, fonts } from '../../designSystem';
 
 type P = {
   title: string,
-  subtitle: string
+  subtitle: string,
+  margin: number,
 };
-const TaRow = ({ title, subtitle }: P) => (
+const TaRow = ({ title, subtitle, margin }: P) => (
   <View style={{ flexDirection: 'column', backgroundColor: colors.pandra }}>
     <View style={{ flexDirection: 'row' }}>
       <Text style={{
-        ...fonts['Title 2'],
+        ...fonts['Title 3'],
         flex: 1,
-        marginTop: 44,
-        marginLeft: 48
+        marginTop: margin ? margin : 0,
+        marginBottom: 16
       }} >
         {title}
       </Text>
-      <View style={{ width: 24, borderWidth: 1, borderColor: 'red', height: 24, marginRight: 16, marginTop: 50}} />
+      <View style={{ width: 24, borderWidth: 1, borderColor: 'red', height: 24, marginRight: 16, marginTop: margin ? (margin + 4) : 0}} />
     </View>
     <Text style={{
-      ...fonts['Title 3'],
+      ...fonts['Large'],
       flex: 1,
-      marginTop: 24,
-      paddingBottom: 42,
-      marginLeft: 48,
-      marginRight: 48,
-      borderBottomWidth: 2,
-      borderColor: colors.goora
+      marginBottom: margin ? margin : 0,
     }} >
       {subtitle}
     </Text>
